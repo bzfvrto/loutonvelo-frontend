@@ -1,4 +1,4 @@
-import Form from "@/app/ui/bikes/create-form";
+import Table from "@/app/ui/brands/table";
 import { fetchBrand } from "@/app/lib/actions";
 
 export default async function Page() {
@@ -8,9 +8,9 @@ export default async function Page() {
     return (
         <main>
             <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4">
-                Create Bike
+                Brands
             </h1>
-            {brands.brands.length > 0 && <Form brands={brands.brands} />}
+            {brands && <Table brands={brands.brands} />}
         </main>
     );
 }

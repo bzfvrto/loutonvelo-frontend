@@ -16,8 +16,27 @@ export default function Form({ brands }: { brands: Brand[] }) {
     return (
         <form action={createBike}>
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
+                {/* Bike Name */}
                 <div className="mb-4">
-                    <label htmlFor="customer" className="mb-2 block text-sm font-medium">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium">
+                        Bike Name
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="Enter bike name"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                            {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mb-4">
+                    <label htmlFor="brand" className="mb-2 block text-sm font-medium">
                         Choose brands
                     </label>
                     <div className="relative">
@@ -32,7 +51,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                     Select a brand
                                 </option>
                                 {brands.map((brand) => (
-                                    <option key={brand.id} value={brand.id}>
+                                    <option key={brand._id} value={brand._id}>
                                         {brand.name}
                                     </option>
                                 ))}
@@ -40,85 +59,127 @@ export default function Form({ brands }: { brands: Brand[] }) {
                             {/* <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" /> */}
                         </div>
                     </div>
-                    {/* Bike Name */}
-                    <div className="mb-4">
-                        <label htmlFor="name" className="mb-2 block text-sm font-medium">
-                            Bike Name
-                        </label>
-                        <div className="relative mt-2 rounded-md">
-                            <div className="relative">
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Enter bike name"
-                                    className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                />
-                                {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
-                            </div>
+                </div>
+
+                {/* Bike Model */}
+                <div className="mb-4">
+                    <label htmlFor="model" className="mb-2 block text-sm font-medium">
+                        Bike Model
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="model"
+                                name="model"
+                                type="text"
+                                placeholder="Enter bike model"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                            {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
                         </div>
                     </div>
+                </div>
 
-                    {/* Bike Model */}
-                    <div className="mb-4">
-                        <label htmlFor="model" className="mb-2 block text-sm font-medium">
-                            Bike Model
-                        </label>
-                        <div className="relative mt-2 rounded-md">
-                            <div className="relative">
-                                <input
-                                    id="model"
-                                    name="model"
-                                    type="text"
-                                    placeholder="Enter bike model"
-                                    className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                />
-                                {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
-                            </div>
+                {/* Floor price */}
+                <div className="mb-4">
+                    <label htmlFor="floorPrice" className="mb-2 block text-sm font-medium">
+                        Floor Price
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="floorPrice"
+                                name="floorPrice"
+                                type="number"
+                                step="0.01"
+                                defaultValue={0}
+                                placeholder="Enter amount for floor price"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                            <CurrencyEuroIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                         </div>
                     </div>
+                </div>
 
-                    {/* Floor price */}
-                    <div className="mb-4">
-                        <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
-                            Floor Price
-                        </label>
-                        <div className="relative mt-2 rounded-md">
-                            <div className="relative">
-                                <input
-                                    id="pricePerHour"
-                                    name="pricePerHour"
-                                    type="number"
-                                    step="0.01"
-                                    placeholder="Enter amount for floor price"
-                                    className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                />
-                                <CurrencyEuroIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                            </div>
+                {/* Price per hour */}
+                <div className="mb-4">
+                    <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
+                        Price per hour
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="pricePerHour"
+                                name="pricePerHour"
+                                type="number"
+                                step="0.01"
+                                placeholder="Enter amount"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                            <CurrencyEuroIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                         </div>
                     </div>
+                </div>
 
-                    {/* Price per hour */}
-                    <div className="mb-4">
-                        <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
-                            Price per hour
-                        </label>
-                        <div className="relative mt-2 rounded-md">
-                            <div className="relative">
-                                <input
-                                    id="pricePerHour"
-                                    name="pricePerHour"
-                                    type="number"
-                                    step="0.01"
-                                    placeholder="Enter amount"
-                                    className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                />
-                                <CurrencyEuroIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                            </div>
+                {/* Bike seats */}
+                <div className="mt-2 mb-4">
+                    <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
+                        Seats
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="seats"
+                                name="seats"
+                                type="number"
+                                step="1"
+                                defaultValue={1}
+                                placeholder="Enter seats"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                            <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                         </div>
                     </div>
+                </div>
 
-                    {/* Bike availability */}
+                {/* Bike color */}
+                <div className="mb-4">
+                    <label htmlFor="color" className="mb-2 block text-sm font-medium">
+                        Color
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="color"
+                                name="color"
+                                type="color"
+                                placeholder="Bike color"
+                                className="peer min-h-8 block rounded-md border border-gray-200 outline-2 placeholder:text-gray-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bike date */}
+                <div className="mb-4">
+                    <label htmlFor="year" className="mb-2 block text-sm font-medium">
+                        Date
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="year"
+                                name="year"
+                                type="month"
+                                placeholder="Bike conception date"
+                                className="peer block rounded-md border border-gray-200 py-4 px-4 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bike availability */}
+                <div className="mb-4">
                     <fieldset>
                         <legend className="mb-2 block text-sm font-medium">Bike current status</legend>
                         <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
@@ -138,6 +199,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                         Available <CheckIcon className="h-4 w-4" />
                                     </label>
                                 </div>
+
                                 <div className="flex items-center">
                                     <input
                                         id="unavailable"
@@ -162,7 +224,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                                     />
                                     <label
-                                        htmlFor="under_reparation"
+                                        htmlFor="underReparation"
                                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
                                     >
                                         Under Reparation <ClockIcon className="h-4 w-4" />
@@ -171,27 +233,27 @@ export default function Form({ brands }: { brands: Brand[] }) {
                             </div>
                         </div>
                     </fieldset>
+                </div>
 
-                    {/* Bike seats */}
-                    <div className="mt-2 mb-4">
-                        <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
-                            Seats
-                        </label>
-                        <div className="relative mt-2 rounded-md">
-                            <div className="relative">
-                                <input
-                                    id="seats"
-                                    name="seats"
-                                    type="number"
-                                    step="1"
-                                    placeholder="Enter seats"
-                                    className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                />
-                                <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                            </div>
+                {/* Bike Decription */}
+                <div className="mb-4">
+                    <label htmlFor="description" className="mb-2 block text-sm font-medium">
+                        Bike Description
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <textarea
+                                id="description"
+                                name="description"
+                                placeholder="Enter bike description"
+                                rows={6}
+                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                            ></textarea>
+                            {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
                         </div>
                     </div>
                 </div>
+
                 <div className="mt-6 flex justify-end gap-4">
                     <Link
                         href="/dashboard/bikes"
@@ -199,7 +261,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                     >
                         Cancel
                     </Link>
-                    <Button type="submit">Create Invoice</Button>
+                    <Button type="submit">Create Bike</Button>
                 </div>
             </div>
         </form>

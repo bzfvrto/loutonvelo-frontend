@@ -1,5 +1,5 @@
 export type User = {
-    id: string;
+    _id: string;
     username: string;
     email: string;
     password: string;
@@ -7,7 +7,7 @@ export type User = {
 };
 
 export type Bike = {
-    id: string;
+    _id: string;
     name: string;
     brand: string;
     model: string;
@@ -23,8 +23,40 @@ export type Bike = {
 };
 
 export type Brand = {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     website: string | null;
+}
+
+export type UpsertBikeApiResponse = {
+    data?: {
+        result: boolean;
+        bike: Omit<Bike, 'fetchedAt'>;
+    },
+    errors?: Array<{message: string}>
+}
+
+export type BikesApiResponse = {
+    data?: {
+        result: boolean;
+        bikes: Bike[];
+    },
+    errors?: Array<{message: string}>
+}
+
+export type UpsertBrandApiResponse = {
+    data?: {
+        result: boolean;
+        brand: Brand;
+    },
+    errors?: Array<{message: string}>
+}
+
+export type BrandsApiResponse = {
+    data?: {
+        result: boolean;
+        brands: Brand[];
+    },
+    errors?: Array<{message: string}>
 }
