@@ -29,6 +29,15 @@ export type Brand = {
     website: string | null;
 }
 
+export type Booking = {
+    _id: string;
+    bikes: string[];
+    user: string;
+    startAt: Date;
+    endAt: Date;
+    status: string;
+}
+
 export type UpsertBikeApiResponse = {
     data?: {
         result: boolean;
@@ -57,6 +66,22 @@ export type BrandsApiResponse = {
     data?: {
         result: boolean;
         brands: Brand[];
+    },
+    errors?: Array<{message: string}>
+}
+
+export type UpsertBookingApiResponse = {
+    data?: {
+        result: boolean;
+        booking: Booking;
+    },
+    errors?: Array<{message: string}>
+}
+
+export type BookingsApiResponse = {
+    data?: {
+        result: boolean;
+        bookings: Booking[];
     },
     errors?: Array<{message: string}>
 }

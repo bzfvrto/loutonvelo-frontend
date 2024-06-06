@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { Brand, UpsertBikeApiResponse } from './definitions';
+import { Brand, UpsertBikeApiResponse, UpsertBookingApiResponse } from './definitions';
 
 const backendUrl = process.env.BACKEND_URL;
 
@@ -20,6 +20,7 @@ export async function fetchBike() {
 
     return brands;
 }
+
 export async function createBike(formData: FormData) {
     console.log('formData', formData);
     const rawFormData = Object.fromEntries(formData.entries());
@@ -37,7 +38,7 @@ export async function createBike(formData: FormData) {
         console.log(data);
 
         if (bike && data.result) {
-            Object.assign(bike, formatDate(new Date()))
+            Object.assign(bike, {fetchedAt: formatDate(new Date())})
             // return bike;
             revalidatePath('/dashboard/bikes');
             redirect('/dashboard/bikes');
@@ -74,4 +75,34 @@ export async function createBrand(formData: FormData) {
     const result = await response.json()
     revalidatePath('/dashboard/brands');
     redirect('/dashboard/brands');
+}
+
+export async function createBooking(formData: FormData) {
+    console.log('formData', formData);
+    const rawFormData = Object.fromEntries(formData.entries());
+    // console.log(rawFormData);
+    const response = await fetch(`${backendUrl}/bookings`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rawFormData)
+    });
+    const { data, errors }: UpsertBookingApiResponse = await response.json();
+    if (response.ok) {
+        const booking = data?.booking;
+        console.log(data);
+
+        if (booking && data.result) {
+            Object.assign(booking, {fetchedAt: formatDate(new Date())})
+            // return bike;
+            revalidatePath('/dashboard/bookings');
+            redirect('/dashboard/bookings');
+        } else {
+            return Promise.reject(new Error(`An error as occured`))
+        }
+    } else {
+        const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
+		return Promise.reject(error)
+    }
 }
