@@ -2,7 +2,9 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { Brand, UpsertBikeApiResponse, UpsertBookingApiResponse } from './definitions';
+import { Brand, LoginUserApiResponse, UpsertBikeApiResponse, UpsertBookingApiResponse } from './definitions';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 const backendUrl = process.env.BACKEND_URL;
 
@@ -98,6 +100,53 @@ export async function createBooking(formData: FormData) {
             // return bike;
             revalidatePath('/dashboard/bookings');
             redirect('/dashboard/bookings');
+        } else {
+            return Promise.reject(new Error(`An error as occured`))
+        }
+    } else {
+        const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
+		return Promise.reject(error)
+    }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
+
+export async function loginUser({ email, password}: {email: string, password: string}) {
+    console.log('formData', email, password, JSON.stringify({email, password}));
+
+    const response = await fetch(`${backendUrl}/users/login`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, password})
+    });
+    const { data, errors }: LoginUserApiResponse = await response.json();
+    if (response.ok) {
+        const user = data?.user;
+        console.log('data from action', data, user);
+
+        if (user && data.result) {
+            Object.assign(user, {loggedAt: formatDate(new Date())})
+            // return bike;
+            return user;
         } else {
             return Promise.reject(new Error(`An error as occured`))
         }

@@ -85,3 +85,11 @@ export type BookingsApiResponse = {
     },
     errors?: Array<{message: string}>
 }
+
+export type LoginUserApiResponse = {
+    data?: {
+        result: boolean;
+        user: User;
+    },
+    errors?: Array<{message: string}>
+}
