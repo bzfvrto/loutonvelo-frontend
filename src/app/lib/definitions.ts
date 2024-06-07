@@ -31,8 +31,8 @@ export type Brand = {
 
 export type Booking = {
     _id: string;
-    bikes: string[];
-    user: string;
+    bikes: Bike[];
+    user: User;
     startAt: Date;
     endAt: Date;
     status: string;

@@ -1,8 +1,9 @@
-import NextAuth from 'next-auth';
+import NextAuth, { DefaultSession } from 'next-auth';
 import { authConfig } from './auth.config';
 import Credentials from 'next-auth/providers/credentials';
 import { loginUser } from './app/lib/actions';
 import { User } from './app/lib/definitions';
+import { JWT } from "next-auth/jwt"
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -25,5 +26,39 @@ export const { auth, signIn, signOut } = NextAuth({
             // return user object with the their profile data
             return null
           },
-  })],
+    })],
+    callbacks: {
+        jwt({ token, user }) {
+            if (user) {
+                token.id = user._id
+            }
+            console.log('token', token);
+
+          return token
+        },
+        session({ session, token }) {
+          session.user._id = token.id
+          return session
+        },
+      },
 });
+
+declare module "next-auth" {
+    interface Session {
+        user: {
+            _id: string;
+      } & DefaultSession["user"];
+    }
+    interface User {
+        _id: string;
+        email?: string | null | undefined;
+    }
+}
+
+declare module "next-auth/jwt" {
+    /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+    interface JWT {
+        id: string,
+        email: string;
+    }
+}

@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { Brand, LoginUserApiResponse, UpsertBikeApiResponse, UpsertBookingApiResponse } from './definitions';
-import { signIn } from '@/auth';
+import { auth, signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
 const backendUrl = process.env.BACKEND_URL;
@@ -79,10 +79,27 @@ export async function createBrand(formData: FormData) {
     redirect('/dashboard/brands');
 }
 
+export async function fetchBooking() {
+    const response = await fetch(`${backendUrl}/bookings`);
+    // console.log(response);
+
+    const bookings = await response.json();
+    // console.log('bookings', bookings);
+
+    return bookings;
+}
+
 export async function createBooking(formData: FormData) {
     console.log('formData', formData);
+    const session = await auth()
+    console.log(session);
+
+    if (!session || !session.user) {
+        return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
+    }
+
+    formData.append('user', session?.user._id)
     const rawFormData = Object.fromEntries(formData.entries());
-    // console.log(rawFormData);
     const response = await fetch(`${backendUrl}/bookings`, {
         method: "POST",
         headers: {
