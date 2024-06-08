@@ -6,6 +6,10 @@ export type User = {
     type: string;
 };
 
+export type Picture = {
+    url: string;
+}
+
 export type Bike = {
     _id: string;
     name: string;
@@ -13,7 +17,7 @@ export type Bike = {
     model: string;
     seats: number;
     availability: string;
-    pictures: object[];
+    pictures: Picture[];
     year: Date;
     color: string;
     description: string;
@@ -93,3 +97,5 @@ export type LoginUserApiResponse = {
     },
     errors?: Array<{message: string}>
 }
+
+export type FileEventTarget = EventTarget & { files: FileList };

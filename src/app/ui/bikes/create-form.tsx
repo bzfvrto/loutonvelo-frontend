@@ -1,3 +1,5 @@
+"use client";
+
 import { Brand } from "@/app/lib/definitions";
 import Link from "next/link";
 import {
@@ -5,14 +7,49 @@ import {
     ClockIcon,
     CurrencyDollarIcon,
     CurrencyEuroIcon,
+    PlusCircleIcon,
     UserCircleIcon,
     UserIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import { createBike } from "@/app/lib/actions";
+import { useRef, useState } from "react";
+import Image from "next/image";
+import { useFormStatus } from "react-dom";
 
 export default function Form({ brands }: { brands: Brand[] }) {
+    const hiddenFileInput = useRef<HTMLInputElement>(null);
+    const [files, setFiles] = useState<File[]>();
+    const { data } = useFormStatus();
+    console.log(data);
+
+    const handleFileBtnClick = () => {
+        if (hiddenFileInput.current) {
+            hiddenFileInput.current.click();
+        }
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            const imgs = Array.from(event.target.files);
+            setFiles((files) => {
+                if (files) {
+                    return [...files, ...imgs];
+                }
+                return imgs;
+            });
+        }
+    };
+
+    const removeImage = (photo: File) => {
+        setFiles((files) => {
+            if (files) {
+                return files.filter((file) => file.name !== photo.name);
+            }
+        });
+    };
+
     return (
         <form action={createBike}>
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -249,6 +286,65 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 rows={6}
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             ></textarea>
+                            {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bike Decription */}
+                <div className="mb-4">
+                    <label htmlFor="description" className="mb-2 block text-sm font-medium">
+                        Bike Pictures
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <input
+                            type="file"
+                            name="pictures"
+                            multiple
+                            ref={hiddenFileInput}
+                            onChange={handleFileChange}
+                            accept="image/*"
+                            style={{ display: "none" }}
+                        />
+                        <button
+                            className="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150"
+                            type="button"
+                            onClick={handleFileBtnClick}
+                            aria-label="file upload"
+                        >
+                            Upload file
+                        </button>
+                        <div className="relative">
+                            {files && files.length > 0 && (
+                                <div className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
+                                    <ul
+                                        role="list"
+                                        className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+                                    >
+                                        {files &&
+                                            files.length > 0 &&
+                                            files.map((photo, index) => {
+                                                return (
+                                                    <li
+                                                        key={index}
+                                                        className="relative focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
+                                                    >
+                                                        <Image
+                                                            key={index}
+                                                            alt={"bike photos"}
+                                                            src={URL.createObjectURL(photo)}
+                                                            // className="dark:invert"
+                                                            width={100}
+                                                            height={150}
+                                                            priority
+                                                            onClick={() => removeImage(photo)}
+                                                        />
+                                                    </li>
+                                                );
+                                            })}
+                                    </ul>
+                                </div>
+                            )}
                             {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
                         </div>
                     </div>

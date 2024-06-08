@@ -18,21 +18,34 @@ export async function fetchBike() {
     const response = await fetch(`${backendUrl}/bikes`);
     // console.log(response);
 
-    const brands = response.json();
+    const bikes = await response.json();
+    console.log('bikes fetched', bikes.data.bikes);
 
-    return brands;
+    return bikes;
+}
+
+export async function fetchBikeAvailable(from: string, to: string) {
+    // if (from && to) {
+
+    // }
+    console.log(from, to);
+
+    const response = await fetch(`${backendUrl}/bikes/available?from=${from}&to=${to}`);
+    // console.log('response', response);
+    // revalidatePath('/dashboard/bikes/available');
+
+    const bikes = await response.json();
+    // console.log('bikes fetched', bikes.data.bikes);
+
+    return bikes;
 }
 
 export async function createBike(formData: FormData) {
     console.log('formData', formData);
-    const rawFormData = Object.fromEntries(formData.entries());
     // console.log(rawFormData);
     const response = await fetch(`${backendUrl}/bikes`, {
         method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(rawFormData)
+        body: formData
     });
     const { data, errors }: UpsertBikeApiResponse = await response.json();
     if (response.ok) {
