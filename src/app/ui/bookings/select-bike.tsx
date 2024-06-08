@@ -1,5 +1,6 @@
 "use client";
 import { Bike } from "@/app/lib/definitions";
+import { UserIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react";
@@ -54,8 +55,7 @@ export default function SelectBike({ bikes, name }: { bikes: Bike[]; name: strin
                                 ),
                             })}
                         >
-                            <div className="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100">
-                                {bike._id}
+                            <div className="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 mb-4">
                                 {bike.pictures.length > 0 && (
                                     <Image
                                         src={bike.pictures[0].url}
@@ -68,10 +68,11 @@ export default function SelectBike({ bikes, name }: { bikes: Bike[]; name: strin
                             </div>
                             <div>
                                 <p className="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900 dark:text-gray-400">
-                                    {bike.name}
+                                    {bike.model}
                                 </p>
-                                <p className="pointer-events-none block text-sm font-medium text-gray-500 dark:text-gray-600">
-                                    {bike.seats}
+                                <p className="flex flex-row pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-600">
+                                    <UserIcon className="pointer-events-none left-3 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
+                                    <span className="text-sm font-light mx-2">x {bike.seats}</span>
                                 </p>
                             </div>
                         </li>

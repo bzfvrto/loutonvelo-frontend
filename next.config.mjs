@@ -6,6 +6,14 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "res.cloudinary.com",
             },
+            {
+                protocol: "https",
+                hostname: "tailwindui.com",
+            },
+            {
+                protocol: "https",
+                hostname: "images.unsplash.com",
+            },
         ],
     },
 };
