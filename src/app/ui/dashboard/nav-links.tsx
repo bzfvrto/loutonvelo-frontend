@@ -4,6 +4,7 @@ import { UserGroupIcon, HomeIcon, DocumentDuplicateIcon, ClipboardDocumentListIc
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { SessionUser, User } from "@/app/lib/definitions";
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -13,18 +14,22 @@ const links = [
         name: "Bikes",
         href: "/dashboard/bikes",
         icon: DocumentDuplicateIcon,
+        role: "reseller",
     },
-    { name: "Brands", href: "/dashboard/brands", icon: UserGroupIcon },
-    { name: "Bookings", href: "/dashboard/bookings", icon: ClipboardDocumentListIcon },
+    { name: "Brands", href: "/dashboard/brands", icon: UserGroupIcon, role: "reseller" },
+    { name: "Bookings", href: "/dashboard/bookings", icon: ClipboardDocumentListIcon, role: "reseller" },
+    { name: "Account", href: "/dashboard/account", icon: UserGroupIcon },
 ];
 
-export default function NavLinks() {
+export default function NavLinks({ user }: { user: SessionUser }) {
     const pathname = usePathname();
+    console.log("uusseerr", user);
+
     return (
         <>
             {links.map((link) => {
                 const LinkIcon = link.icon;
-                return (
+                return !link?.role || user.role === link.role ? (
                     <Link
                         key={link.name}
                         href={link.href}
@@ -38,6 +43,8 @@ export default function NavLinks() {
                         <LinkIcon className="w-6" />
                         <p className="hidden md:block">{link.name}</p>
                     </Link>
+                ) : (
+                    ""
                 );
             })}
         </>

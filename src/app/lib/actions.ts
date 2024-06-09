@@ -185,3 +185,60 @@ export async function loginUser({ email, password}: {email: string, password: st
 		return Promise.reject(error)
     }
 }
+
+export async function register(prevState: string | undefined, formData: FormData) { // { firstName, lastName, email, password }: { firstName: string, lastName: string, email: string, password: string },
+    // console.log(firstName, lastName, email, password);
+    console.log('formData register', formData);
+    const rawFormData = Object.fromEntries(formData.entries());
+
+    const response = await fetch(`${backendUrl}/users/register`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rawFormData)
+    });
+    // const { data, errors }: LoginUserApiResponse = await response.json();
+    return await response.json()
+    // if (response.ok) {
+    //     const user = data?.user;
+    //     console.log('data from action', data, user);
+
+    //     if (user && data.result) {
+    //         Object.assign(user, { loggedAt: formatDate(new Date()) })
+    //         // let fd = new FormData();
+    //         // fd.append("email", email);
+    //         // fd.append("password", password);
+    //         // await signIn("credentials", {
+    //         //     email,
+    //         //     password
+    //         // });
+    //         return user;
+    //     } else {
+    //         return Promise.reject(new Error(`An error as occured registering user`))
+    //     }
+    // } else {
+    //     const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
+	// 	return Promise.reject(error)
+    // }
+}
+
+export async function activateResellerAccount() {
+    const session = await auth()
+    console.log('session', session);
+
+    if (!session || !session.user) {
+        return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
+    }
+
+    const response = await fetch(`${backendUrl}/users/update-account`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userId: session.user._id})
+    });
+
+    const user = await response.json();
+    return user;
+}

@@ -48,7 +48,8 @@ export default async function BrandsTable({ bookings }: { bookings: Booking[] })
                                                     />
                                                     <div className="flex flex-col flex-1">
                                                         <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-50">
-                                                            {booking.user.username} - {booking.bikes[0].model}
+                                                            {booking.user.firstName} {booking.user.lastName} -{" "}
+                                                            {booking.bikes[0].model}
                                                         </h4>
                                                         <p className="text-sm text-gray-500">
                                                             At : {new Date(booking.startAt).toLocaleString()}
@@ -89,7 +90,8 @@ export default async function BrandsTable({ bookings }: { bookings: Booking[] })
                                                         height={28}
                                                     /> */}
                                                     <p>
-                                                        {booking.user.username} - {booking.bikes[0].model}
+                                                        {booking.user.firstName} {booking.user.lastName} -{" "}
+                                                        {booking.bikes[0].model}
                                                     </p>
                                                 </div>
                                             </td>

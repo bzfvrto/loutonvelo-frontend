@@ -1,9 +1,13 @@
+import { DefaultSession } from "next-auth";
+
 export type User = {
     _id: string;
-    username: string;
+    username?: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
-    type: string;
+    role: string;
 };
 
 export type Picture = {
@@ -97,5 +101,9 @@ export type LoginUserApiResponse = {
     },
     errors?: Array<{message: string}>
 }
+export type SessionUser = {
+    _id: string;
+    role: string;
+} & DefaultSession["user"];
 
 export type FileEventTarget = EventTarget & { files: FileList };
