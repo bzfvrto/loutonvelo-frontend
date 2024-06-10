@@ -2,11 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { Brand, LoginUserApiResponse, UpsertBikeApiResponse, UpsertBookingApiResponse } from './definitions';
+import { Brand, LoginUserApiResponse, Shop, ShopApiResponse, UpsertBikeApiResponse, UpsertBookingApiResponse, UpsertShopApiResponse } from './definitions';
 import { auth, signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
 const backendUrl = process.env.BACKEND_URL;
+const openRouteApiKey = process.env.OPEN_ROUTE_API_KEY
 
 /* formatDate src: https://kentcdodds.com/blog/using-fetch-with-type-script */
 const formatDate = (date: Date) =>
@@ -241,4 +242,67 @@ export async function activateResellerAccount() {
 
     const user = await response.json();
     return user;
+}
+
+export async function fetchShop(userId: string): Promise<Shop | null> {
+    const response = await fetch(`${backendUrl}/shops/for-owner`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: userId })
+    });
+    const shopsResponse = await response.json();
+    console.log(shopsResponse);
+    if (shopsResponse.result === false) {
+        return Promise.reject(shopsResponse.errors[0])
+    }
+    console.log(shopsResponse.data.shops);
+
+    return shopsResponse.data.shops.length > 0 ? shopsResponse.data.shops[0] : null;
+}
+
+export async function createShop(formData: FormData) {
+    const session = await auth()
+
+    if (!session || !session.user) {
+        return Promise.reject(new Error(`You must be authenticated in order to create a shop`))
+    }
+
+    formData.append('user', session?.user._id)
+    console.log('formData', formData);
+    const rawFormData = Object.fromEntries(formData.entries());
+    const response = await fetch(`${backendUrl}/shops`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rawFormData)
+    });
+    const { data, errors }: UpsertShopApiResponse = await response.json();
+    if (response.ok) {
+        const shop = data?.shop;
+        console.log(data);
+
+        if (shop && data.result) {
+            Object.assign(shop, {fetchedAt: formatDate(new Date())})
+            // return bike;
+            revalidatePath('/dashboard');
+            redirect('/dashboard');
+        } else {
+            return Promise.reject(new Error(`An error as occured`))
+        }
+    } else {
+        const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
+        return Promise.reject(error)
+    }
+}
+
+export async function searchAddress(query: string) {
+    console.log('query', query);
+
+    const response = await fetch(`https://api.openrouteservice.org/geocode/autocomplete?api_key=${openRouteApiKey}&text=${query}`);
+    const result = await response.json();
+    console.log(result);
+
 }

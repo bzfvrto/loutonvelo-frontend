@@ -46,6 +46,21 @@ export type Booking = {
     status: string;
 }
 
+export type Address = {
+    housenumber: number;
+    street: string;
+    city: string;
+    postcode: string;
+    country: string;
+}
+export type Shop = {
+    _id: string;
+    name: string;
+    description: string;
+    website: string;
+    address: Address;
+}
+
 export type UpsertBikeApiResponse = {
     data?: {
         result: boolean;
@@ -90,6 +105,22 @@ export type BookingsApiResponse = {
     data?: {
         result: boolean;
         bookings: Booking[];
+    },
+    errors?: Array<{message: string}>
+}
+
+export type UpsertShopApiResponse = {
+    data?: {
+        result: boolean;
+        shop: Shop;
+    },
+    errors?: Array<{message: string}>
+}
+
+export type ShopApiResponse = {
+    data?: {
+        result: boolean;
+        shops: Shop[];
     },
     errors?: Array<{message: string}>
 }

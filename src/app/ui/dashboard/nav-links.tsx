@@ -23,7 +23,6 @@ const links = [
 
 export default function NavLinks({ user }: { user: SessionUser }) {
     const pathname = usePathname();
-    console.log("uusseerr", user);
 
     return (
         <>

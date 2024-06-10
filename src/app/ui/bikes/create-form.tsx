@@ -14,15 +14,20 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import { createBike } from "@/app/lib/actions";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
+import { ShopContext } from "@/app/contexts/shopContext";
 
 export default function Form({ brands }: { brands: Brand[] }) {
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[]>();
     const { data } = useFormStatus();
     console.log(data);
+    const { shop } = useContext(ShopContext);
+    if (!shop) {
+        throw new Error("No Shop defined");
+    }
 
     const handleFileBtnClick = () => {
         if (hiddenFileInput.current) {
@@ -53,6 +58,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
     return (
         <form action={createBike}>
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
+                <input type="hidden" name="shop" value={shop._id} />
                 {/* Bike Name */}
                 <div className="mb-4">
                     <label htmlFor="name" className="mb-2 block text-sm font-medium">
@@ -215,6 +221,24 @@ export default function Form({ brands }: { brands: Brand[] }) {
                     </div>
                 </div>
 
+                {/* Bike Size */}
+                <div className="mb-4">
+                    <label htmlFor="year" className="mb-2 block text-sm font-medium">
+                        Size
+                    </label>
+                    <div className="relative mt-2 rounded-md">
+                        <div className="relative">
+                            <input
+                                id="size"
+                                name="size"
+                                type="text"
+                                placeholder="Bike size : ex S, M, L or 45, 54, 58"
+                                className="peer block rounded-md border border-gray-200 py-4 px-4 text-sm outline-2 placeholder:text-gray-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+
                 {/* Bike availability */}
                 <div className="mb-4">
                     <fieldset>
@@ -291,7 +315,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                     </div>
                 </div>
 
-                {/* Bike Decription */}
+                {/* Bike Pictures */}
                 <div className="mb-4">
                     <label htmlFor="description" className="mb-2 block text-sm font-medium">
                         Bike Pictures

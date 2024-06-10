@@ -1,3 +1,4 @@
+"use client";
 // import { Brand } from "@/app/lib/definitions";
 import Link from "next/link";
 import {
@@ -12,12 +13,20 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import { createBrand } from "@/app/lib/actions";
+import { useContext } from "react";
+import { ShopContext } from "@/app/contexts/shopContext";
 
 export default function Form() {
+    const { shop } = useContext(ShopContext);
+    if (!shop) {
+        throw new Error("No Shop defined");
+    }
+
     return (
         <form action={createBrand}>
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
                 <div className="mb-4">
+                    <input type="hidden" name="shop" value={shop._id} />
                     {/* Brand Name */}
                     <div className="mb-4">
                         <label htmlFor="name" className="mb-2 block text-sm font-medium">
