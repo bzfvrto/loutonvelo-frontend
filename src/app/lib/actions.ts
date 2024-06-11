@@ -25,13 +25,13 @@ export async function fetchBike() {
     return bikes;
 }
 
-export async function fetchBikeAvailable(from: string, to: string) {
+export async function fetchBikeAvailable(from: string, to: string, city: string) {
     // if (from && to) {
 
     // }
     console.log(from, to);
 
-    const response = await fetch(`${backendUrl}/bikes/available?from=${from}&to=${to}`);
+    const response = await fetch(`${backendUrl}/bikes/available?from=${from}&to=${to}&city=${city}`);
     // console.log('response', response);
     // revalidatePath('/dashboard/bikes/available');
 
@@ -244,7 +244,7 @@ export async function activateResellerAccount() {
     return user;
 }
 
-export async function fetchShop(userId: string): Promise<Shop | null> {
+export async function fetchOwnerShop(userId: string): Promise<Shop | null> {
     const response = await fetch(`${backendUrl}/shops/for-owner`, {
         method: "POST",
         headers: {
@@ -260,6 +260,18 @@ export async function fetchShop(userId: string): Promise<Shop | null> {
     console.log(shopsResponse.data.shops);
 
     return shopsResponse.data.shops.length > 0 ? shopsResponse.data.shops[0] : null;
+}
+
+export async function fetchShopsInCity(city: string) {
+    const response = await fetch(`${backendUrl}/shops/city/${city}`);
+    const shopsResponse = await response.json();
+    // console.log('shopsResponse', shopsResponse);
+    // if (shopsResponse.result === false) {
+    //     return Promise.reject(shopsResponse.errors)
+    // }
+    // console.log(shopsResponse.data.shops);
+
+    return shopsResponse;
 }
 
 export async function createShop(formData: FormData) {

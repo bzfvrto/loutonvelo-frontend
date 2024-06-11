@@ -39,11 +39,29 @@ export default function NavBar() {
                         </a>
                     ))}
                 </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                <div className="hidden lg:flex lg:flex-row lg:gap-x-12  lg:flex-1 lg:justify-end">
+                    <div className="">
+                        <a
+                            href="/auth/register"
+                            className="text-sm font-semibold leading-6 text-white hover:text-gray-300 hover:ring-2 hover:ring-pink-800 hover:ring-offset-1 rounded-lg px-2 py-1"
+                        >
+                            Register
+                        </a>
+                    </div>
+                    <div className="">
+                        <a
+                            href="/auth/login"
+                            className="text-sm font-semibold leading-6 text-white  hover:text-gray-300 hover:ring-2 hover:ring-pink-800 hover:ring-offset-1 rounded-lg px-2 py-1"
+                        >
+                            Log in <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+                {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <a href="/auth/login" className="text-sm font-semibold leading-6 text-white">
                         Log in <span aria-hidden="true">&rarr;</span>
                     </a>
-                </div>
+                </div> */}
             </nav>
             {/* <Dialog className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-50" />

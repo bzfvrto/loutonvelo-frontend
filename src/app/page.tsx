@@ -5,7 +5,7 @@ import LastBikes from "./ui/landing/last-bikes";
 import BookingForm from "./ui/landing/booking-form";
 
 export default async function Home() {
-    const bikesResponse = await fetchBike();
+    // const bikesResponse = await fetchBike();
     return (
         <>
             <div className="relative pb-36">

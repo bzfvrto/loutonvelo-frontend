@@ -28,6 +28,8 @@ export type Bike = {
     externalLink: string;
     floorPrice: number;
     pricePerHour: number;
+    size: string;
+    shop: string;
 };
 
 export type Brand = {

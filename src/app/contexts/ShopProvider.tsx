@@ -2,7 +2,7 @@
 
 import { ShopContext } from "@/app/contexts/shopContext";
 import { auth } from "@/auth";
-import { fetchShop } from "@/app/lib/actions";
+import { fetchOwnerShop } from "@/app/lib/actions";
 import { SessionUser, Shop } from "@/app/lib/definitions";
 import { useEffect } from "react";
 
@@ -13,7 +13,7 @@ export function ShopProvider({ user, children }: { user: SessionUser; children: 
     useEffect(() => {
         if (user.role === "reseller" && shopCtxt.shop === null) {
             (async () => {
-                await fetchShop(user._id)
+                await fetchOwnerShop(user._id)
                     .then((shop) => {
                         if (shop) {
                             shopCtxt.shop = shop;
