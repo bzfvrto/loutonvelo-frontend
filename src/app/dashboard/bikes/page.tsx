@@ -5,7 +5,7 @@ import { Button } from "@/app/ui/button";
 
 export default async function Page() {
     const bikesResponse = await fetchBike();
-    console.log(bikesResponse.data.bikes);
+    console.log("bikesResponse.data.bikes", bikesResponse.data.bikes);
 
     return (
         <main>

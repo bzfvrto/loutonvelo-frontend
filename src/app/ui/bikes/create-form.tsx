@@ -1,6 +1,6 @@
 "use client";
 
-import { Brand } from "@/app/lib/definitions";
+import { Brand, Shop } from "@/app/lib/definitions";
 import Link from "next/link";
 import {
     CheckIcon,
@@ -14,7 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import { createBike } from "@/app/lib/actions";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, Suspense, useEffect } from "react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
 import { ShopContext } from "@/app/contexts/shopContext";
@@ -24,10 +24,16 @@ export default function Form({ brands }: { brands: Brand[] }) {
     const [files, setFiles] = useState<File[]>();
     const { data } = useFormStatus();
     console.log(data);
-    const { shop } = useContext(ShopContext);
-    if (!shop) {
-        throw new Error("No Shop defined");
-    }
+    const { loading, shop } = useContext(ShopContext);
+    // const [userShop, setUserShop] = useState<Shop>();
+    // useEffect(() => {
+    //     console.log("in use effect ", shop);
+
+    //     if (shop !== null) {
+    //         setUserShop(shop);
+    //         console.log(shop);
+    //     }
+    // }, [shop]);
 
     const handleFileBtnClick = () => {
         if (hiddenFileInput.current) {
@@ -54,6 +60,11 @@ export default function Form({ brands }: { brands: Brand[] }) {
             }
         });
     };
+
+    if (loading || shop === null) {
+        // throw new Error("No Shop defined");
+        return <div></div>;
+    }
 
     return (
         <form action={createBike}>
@@ -213,8 +224,8 @@ export default function Form({ brands }: { brands: Brand[] }) {
                             <input
                                 id="year"
                                 name="year"
-                                type="month"
-                                placeholder="Bike conception date"
+                                type="date"
+                                // placeholder="Bike conception date"
                                 className="peer block rounded-md border border-gray-200 py-4 px-4 text-sm outline-2 placeholder:text-gray-500"
                             />
                         </div>

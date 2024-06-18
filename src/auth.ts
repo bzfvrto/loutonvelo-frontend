@@ -5,19 +5,32 @@ import { loginUser } from './app/lib/actions';
 import { User } from './app/lib/definitions';
 import { JWT } from "next-auth/jwt"
 
-export const { auth, signIn, signOut } = NextAuth({
-  ...authConfig,
+export const { handlers, auth, signIn, signOut } = NextAuth({
+    ...authConfig,
+    debug: true,
+    // logger: {
+    //     error(code, ...message) {
+    //       console.error(code, message)
+    //     },
+    //     warn(code, ...message) {
+    //         console.warn(code, message)
+    //     },
+    //     debug(code, ...message) {
+    //         console.debug(code, message)
+    //     },
+    //   },
     providers: [Credentials({
         credentials: {
             email: {},
             password: {},
         },
         authorize: async (credentials) => {
-            if (credentials.email && credentials.password) {
+            if (credentials.email && credentials.email !== "" && credentials.password) {
                 const user = await loginUser({ email: String(credentials.email), password: String(credentials.password) })
-                console.log('in authorize method', user);
+                console.log('in authorize method');
 
                 if (user) {
+                    console.log('isset user', user);
                     return user;
                 }
                 console.log('Invalid credentials');
@@ -25,7 +38,7 @@ export const { auth, signIn, signOut } = NextAuth({
             }
             // return user object with the their profile data
             return null
-          },
+        },
     })],
     callbacks: {
         jwt({ token, user }) {
@@ -44,7 +57,10 @@ export const { auth, signIn, signOut } = NextAuth({
 
           return session
         },
-      },
+    },
+    session: {
+        strategy: 'jwt',
+    },
 });
 
 declare module "next-auth" {
@@ -52,11 +68,13 @@ declare module "next-auth" {
         user: {
             _id: string;
             role: string;
+            token: string;
       } & DefaultSession["user"];
     }
     interface User {
         _id: string;
         role: string;
+        token: string;
         email?: string | null | undefined;
     }
 }
@@ -67,5 +85,6 @@ declare module "next-auth/jwt" {
         id: string,
         email: string;
         role: string;
+        token: string;
     }
 }

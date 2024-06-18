@@ -17,9 +17,11 @@ import { useContext } from "react";
 import { ShopContext } from "@/app/contexts/shopContext";
 
 export default function Form() {
-    const { shop } = useContext(ShopContext);
-    if (!shop) {
-        throw new Error("No Shop defined");
+    const { loading, shop } = useContext(ShopContext);
+
+    if (loading || shop === null) {
+        // throw new Error("No Shop defined");
+        return <div></div>;
     }
 
     return (

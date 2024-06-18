@@ -17,7 +17,6 @@ const formatDate = (date: Date) =>
 
 export async function fetchBike() {
     const response = await fetch(`${backendUrl}/bikes`);
-    // console.log(response);
 
     const bikes = await response.json();
     console.log('bikes fetched', bikes.data.bikes);
@@ -144,7 +143,9 @@ export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
-  try {
+    try {
+      console.log('formData in signiIn', formData);
+
     await signIn('credentials', formData);
   } catch (error) {
     if (error instanceof AuthError) {

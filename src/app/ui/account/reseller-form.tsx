@@ -3,22 +3,31 @@
 import { activateResellerAccount, createShop } from "@/app/lib/actions";
 import { Button } from "@/app/ui/button";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Address from "./address";
 import Link from "next/link";
-import { SessionUser, User } from "@/app/lib/definitions";
+import { SessionUser, Shop, User } from "@/app/lib/definitions";
 import { Session } from "next-auth";
+import { ShopContext } from "@/app/contexts/shopContext";
+import { useFormState } from "react-dom";
 
 export default function ResellerForm({ user }: { user: SessionUser }) {
     const [isReseller, setIsReseller] = useState(user.role === "reseller");
     const toggleResellerAccount = () => {
         setIsReseller((current) => !current);
     };
-    // const activateReseller = async () => {
-    //     console.log("activating");
-    //     const updatedUser = await activateResellerAccount();
-    //     console.log("user updated", updatedUser);
-    // };
+    const { loading, shop } = useContext(ShopContext);
+
+    if (isReseller && loading) {
+        return <div></div>;
+    }
+
+    // const [userShop, setUserShop] = useState<Shop | null>(null);
+    // const [shopName, setShopName] = useState("");
+    // const [shopDesc, setShopDesc] = useState("");
+    // const [shopWebsite, setShopWebsite] = useState("");
+    // const [shopAddress, setShopAddress] = useState({ street: "", city: "", postcode: "", country:  });
+
     return (
         <div>
             <form action={createShop}>
@@ -105,6 +114,7 @@ export default function ResellerForm({ user }: { user: SessionUser }) {
                                             id="name"
                                             name="name"
                                             type="text"
+                                            defaultValue={shop?.name}
                                             placeholder="Enter bike name"
                                             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
                                         />
@@ -123,6 +133,7 @@ export default function ResellerForm({ user }: { user: SessionUser }) {
                                         <textarea
                                             id="description"
                                             name="description"
+                                            defaultValue={shop?.description}
                                             placeholder="Enter shop description"
                                             rows={6}
                                             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
@@ -142,6 +153,7 @@ export default function ResellerForm({ user }: { user: SessionUser }) {
                                         <input
                                             id="website"
                                             name="website"
+                                            defaultValue={shop?.website}
                                             type="text"
                                             placeholder="Enter shop website"
                                             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
@@ -154,7 +166,7 @@ export default function ResellerForm({ user }: { user: SessionUser }) {
                             {/* Shop Address */}
                             <div className="mt-8">
                                 <span className="my-2 block text-sm font-medium">Shop Address</span>
-                                <Address />
+                                <Address address={shop?.address} />
                             </div>
                         </div>
                         <div className="mt-6 flex justify-end gap-4">
