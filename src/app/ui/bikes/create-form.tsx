@@ -18,6 +18,7 @@ import { useRef, useState, useContext, Suspense, useEffect } from "react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
 import { ShopContext } from "@/app/contexts/shopContext";
+import { YearInput } from "../inputs/year-input";
 
 export default function Form({ brands }: { brands: Brand[] }) {
     const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -217,17 +218,23 @@ export default function Form({ brands }: { brands: Brand[] }) {
                 {/* Bike date */}
                 <div className="mb-4">
                     <label htmlFor="year" className="mb-2 block text-sm font-medium">
-                        Date
+                        Bike release year
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
-                            <input
+                            <YearInput
+                                id="year"
+                                name="year"
+                                type="date"
+                                className="bg-gray-50 mt-2 block rounded-md border-0 py-4 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            {/* <input
                                 id="year"
                                 name="year"
                                 type="date"
                                 // placeholder="Bike conception date"
                                 className="peer block rounded-md border border-gray-200 py-4 px-4 text-sm outline-2 placeholder:text-gray-500"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
