@@ -45,6 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             if (user) {
                 token.id = user._id
                 token.role = user.role
+                token.bearer = user.token
             }
             // console.log('token', token);
 
@@ -53,9 +54,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session({ session, token }) {
             session.user._id = token.id
             session.user.role = token.role
+            session.bearer = token.bearer
             // console.log("session", session);
-
-          return session
+            return session
         },
     },
     session: {
@@ -65,6 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
 declare module "next-auth" {
     interface Session {
+        bearer: string;
         user: {
             _id: string;
             role: string;
@@ -75,6 +77,7 @@ declare module "next-auth" {
         _id: string;
         role: string;
         token: string;
+        bearer?: string;
         email?: string | null | undefined;
     }
 }
@@ -86,5 +89,6 @@ declare module "next-auth/jwt" {
         email: string;
         role: string;
         token: string;
+        bearer: string;
     }
 }

@@ -3,17 +3,40 @@ import { Bike } from "@/app/lib/definitions";
 import { UserIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function SelectBike({ bikes, name }: { bikes: Bike[]; name: string }) {
-    const [selected, setSelected] = useState<string[]>([]);
+export default function SelectBike({
+    bikes,
+    name,
+    onSelect,
+    initialeValue = [],
+}: {
+    bikes: Bike[];
+    name: string;
+    onSelect?: (selected: { bikes: string[]; shop: string | null }) => void;
+    initialeValue?: string[];
+}) {
+    const [selected, setSelected] = useState(initialeValue);
 
-    const toggleItemSelection = (bikeId: string) => {
-        if (selected.includes(bikeId)) {
-            setSelected((items) => items.filter((item) => item !== bikeId));
+    const toggleItemSelection = (bike: Bike) => {
+        if (selected.includes(bike._id)) {
+            const filteredBikeIds = selected.filter((item) => {
+                return item !== bike._id;
+            });
+            updateSelected(filteredBikeIds);
+            if (onSelect) {
+                onSelect({ bikes: filteredBikeIds, shop: filteredBikeIds.length > 0 ? bike.shop : null });
+            }
         } else {
-            setSelected((items) => [...items, bikeId]);
+            updateSelected([...selected, bike._id]);
+            if (onSelect) {
+                onSelect({ bikes: [...selected, bike._id], shop: bike.shop });
+            }
         }
+    };
+
+    const updateSelected = (bikeIds: string[]) => {
+        setSelected((selected) => bikeIds);
     };
 
     return (
@@ -24,12 +47,12 @@ export default function SelectBike({ bikes, name }: { bikes: Bike[]; name: strin
                     role="list"
                     className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
                 >
-                    {bikes.map((bike) => (
+                    {bikes.map((bike: Bike) => (
                         <li
                             key={bike._id}
                             onClick={() => {
-                                console.log(bike._id);
-                                toggleItemSelection(bike._id);
+                                // console.log(bike._id);
+                                toggleItemSelection(bike);
                             }}
                             className={clsx(
                                 "flex flex-col content-between rounded-lg bg-gray-100 dark:bg-gray-600 shadow-md hover:shadow-inner",
@@ -55,7 +78,7 @@ export default function SelectBike({ bikes, name }: { bikes: Bike[]; name: strin
                                 <p className="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900 dark:text-gray-400">
                                     {bike.model}
                                 </p>
-                                <p className="flex flex-row w-full justify-between pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-600 mt-1">
+                                <div className="flex flex-row w-full justify-between pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-600 mt-1">
                                     <div className="text-sm font-light mx-2 text-gray-500 dark:text-gray-400">
                                         Size: <span>{bike.size}</span>
                                     </div>
@@ -65,7 +88,7 @@ export default function SelectBike({ bikes, name }: { bikes: Bike[]; name: strin
                                             Seats: {bike.seats}
                                         </span>
                                     </div>
-                                </p>
+                                </div>
                             </div>
                         </li>
                     ))}

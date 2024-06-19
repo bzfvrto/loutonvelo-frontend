@@ -16,7 +16,18 @@ const formatDate = (date: Date) =>
 	).padStart(2, '0')}.${String(date.getMilliseconds()).padStart(3, '0')}`
 
 export async function fetchBike() {
-    const response = await fetch(`${backendUrl}/bikes`);
+    const session = await auth()
+    console.log('session', session);
+
+    if (!session || !session.user || !session.bearer) {
+        return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
+    }
+
+    const response = await fetch(`${backendUrl}/bikes`, {
+        headers: {
+            "Authorization": `Bearer ${session.bearer}`
+        }
+    });
 
     const bikes = await response.json();
     console.log('bikes fetched', bikes.data.bikes);
@@ -67,7 +78,18 @@ export async function createBike(formData: FormData) {
 }
 
 export async function fetchBrand() {
-    const response = await fetch(`${backendUrl}/brands`);
+    const session = await auth()
+    console.log('session', session);
+
+    if (!session || !session.user || !session.bearer) {
+        return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
+    }
+
+    const response = await fetch(`${backendUrl}/brands`, {
+        headers: {
+            "Authorization": `Bearer ${session.bearer}`
+        }
+    });
     // console.log(response);
 
     const brands = response.json();
@@ -92,8 +114,14 @@ export async function createBrand(formData: FormData) {
     redirect('/dashboard/brands');
 }
 
-export async function fetchBooking() {
-    const response = await fetch(`${backendUrl}/bookings`);
+export async function fetchBooking(scope: "shop" | "user" = "shop") {
+    const bearer = await userBearer();
+
+    const response = await fetch(`${backendUrl}/bookings?type=${scope}`, {
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        }
+    });
     // console.log(response);
 
     const bookings = await response.json();
@@ -102,21 +130,19 @@ export async function fetchBooking() {
     return bookings;
 }
 
-export async function createBooking(formData: FormData) {
-    console.log('formData', formData);
+export async function createBooking(prevState: string | undefined, formData: FormData) {
     const session = await auth()
-    console.log(session);
 
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.bearer) {
         return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
     }
 
-    formData.append('user', session?.user._id)
     const rawFormData = Object.fromEntries(formData.entries());
     const response = await fetch(`${backendUrl}/bookings`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": `Bearer ${session.bearer}`
         },
         body: JSON.stringify(rawFormData)
     });
@@ -318,4 +344,14 @@ export async function searchAddress(query: string) {
     const result = await response.json();
     console.log(result);
 
+}
+
+const userBearer = async () => {
+    const session = await auth()
+    console.log('session', session);
+
+    if (!session || !session.user || !session.bearer) {
+        return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
+    }
+    return session.bearer;
 }

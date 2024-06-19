@@ -1,6 +1,17 @@
 "use client";
 
-import { UserGroupIcon, HomeIcon, DocumentDuplicateIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
+import {
+    UserGroupIcon,
+    HomeIcon,
+    DocumentDuplicateIcon,
+    ClipboardDocumentListIcon,
+    BookmarkSquareIcon,
+    UserIcon,
+    CalendarDaysIcon,
+    Cog6ToothIcon,
+    SwatchIcon,
+    PresentationChartLineIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -10,15 +21,17 @@ import { SessionUser, User } from "@/app/lib/definitions";
 // Depending on the size of the application, this would be stored in a database.
 const links = [
     { name: "Home", href: "/dashboard", icon: HomeIcon },
+    { name: "Profil", href: "/dashboard/account", icon: UserIcon },
+    { name: "Reservations", href: "/dashboard/reservations", icon: CalendarDaysIcon, role: "reseller" },
+    { name: "My shop", href: "/dashboard/reseller", icon: PresentationChartLineIcon },
     {
         name: "Bikes",
         href: "/dashboard/bikes",
-        icon: DocumentDuplicateIcon,
+        icon: Cog6ToothIcon,
         role: "reseller",
     },
-    { name: "Brands", href: "/dashboard/brands", icon: UserGroupIcon, role: "reseller" },
+    { name: "Brands", href: "/dashboard/brands", icon: SwatchIcon, role: "reseller" },
     { name: "Bookings", href: "/dashboard/bookings", icon: ClipboardDocumentListIcon, role: "reseller" },
-    { name: "Account", href: "/dashboard/account", icon: UserGroupIcon },
 ];
 
 export default function NavLinks({ user }: { user: SessionUser }) {

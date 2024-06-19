@@ -1,11 +1,17 @@
 "use client";
 import { createBooking, fetchBikeAvailable, fetchShopsInCity } from "@/app/lib/actions";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SelectBike from "../bookings/select-bike";
 import { Button } from "../button";
 import SelectShop from "../bookings/select-shop";
+import { BookingContext } from "@/app/contexts/bookingContext";
+import { User } from "next-auth";
+import { Modal } from "../modal";
+import { Bike } from "@/app/lib/definitions";
+import { useFormState, useFormStatus } from "react-dom";
+import { ArrowRightIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
-export default function BookingForm() {
+export default function BookingForm({ user }: { user: null | User }) {
     const [city, setCity] = useState("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
@@ -13,13 +19,24 @@ export default function BookingForm() {
     const [fetchError, setFetchError] = useState<string[]>([]);
     const [shopsInCity, setAvailableShopsInCity] = useState([]);
 
-    // console.log(fetchError);
-    // console.log(availableBikes);
+    const [showConnectModal, setShowConnectModal] = useState(false);
+
+    const [selectedShop, setSelectedShop] = useState<string | null>(null);
+    const [selectedBikes, setSelectedBikes] = useState<string[]>([]);
+    // const { booking, setBooking } = useContext(BookingContext);
+    const [bikeInputKey, setBikeInputKey] = useState(Date.now);
+
+    const [errorMessage, dispatch] = useFormState(createBooking, undefined);
+
+    useEffect(() => {
+        if (user) {
+            setShowConnectModal(false);
+        }
+    }, [user]);
 
     useEffect(() => {
         (async () => {
             console.log(city);
-
             if (city === "") {
                 setFetchError((msgs) => []);
                 setAvailableShopsInCity([]);
@@ -63,20 +80,61 @@ export default function BookingForm() {
         })();
         return () => {};
     }, [startDate, endDate, city]);
+
+    const handleBookingCreation = (formData: FormData) => {
+        if (formData) {
+            console.log({
+                city: formData.get("city")?.toString() ?? "",
+                bikes: formData.get("bikes")?.toString() ?? "",
+                shop: formData.get("shop")?.toString() ?? "",
+                startAt: formData.get("startAt")?.toString() ?? "",
+                endAt: formData.get("endAt")?.toString() ?? "",
+            });
+            dispatch(formData);
+            // setBooking({
+            //     city: formData.get("city")?.toString() ?? "",
+            //     bikes: formData.get("city")?.toString() ?? "",
+            //     shop: formData.get("shop")?.toString() ?? "",
+            //     startAt: formData.get("startAt")?.toString() ?? "",
+            //     endAt: formData.get("endAt")?.toString() ?? "",
+            // });
+        }
+    };
+
+    const connectUser = () => {
+        setShowConnectModal(true);
+    };
+    const closeModal = () => {
+        setShowConnectModal(false);
+        console.log("closing");
+    };
+
+    const handleShopSelected = (shopId: string | null) => {
+        setSelectedShop(shopId);
+        setBikeInputKey(Date.now());
+    };
+
+    const handleBikeSelected = (selected: { bikes: string[]; shop: string | null }) => {
+        console.log("selecteddddd", selected);
+
+        setSelectedShop(selected.shop ? selected.shop : null);
+        setSelectedBikes(selected.bikes);
+    };
+
     return (
         <div className="relative bg-white dark:bg-gray-800  rounded-lg w-5/6 mx-auto">
             <h4 className="text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl lg:text-6xl pt-4">
                 Book a Bike
             </h4>
             <div className="bg-white dark:bg-gray-800 px-6 py-8 shadow sm:rounded-lg sm:px-12">
-                <form action={createBooking}>
+                <form action={handleBookingCreation}>
                     {/* Booking City */}
                     <div className="mb-4">
                         <label
                             htmlFor="city"
-                            className="mb-2 w-2/3 md:mx-auto block text-sm font-medium text-gray-900 dark:text-gray-200"
+                            className="mb-2 w-full md:mx-auto block text-sm font-medium text-gray-900 dark:text-gray-200"
                         >
-                            City
+                            Enter city name then we will disply available bikes.
                         </label>
                         <div className="relative mt-2 rounded-md">
                             <div className="relative">
@@ -87,16 +145,14 @@ export default function BookingForm() {
                                     onChange={(e) => setCity(e.target.value)}
                                     type="text"
                                     placeholder="Search city with bookable bike"
-                                    className="peer w-2/3 md:mx-auto block rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
+                                    className="peer w-full md:mx-auto block rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {shopsInCity.length > 0 && <SelectShop shops={shopsInCity} name="shops" />}
-
                     {city !== "" && shopsInCity.length > 0 && (
-                        <div className="flex flex-col md:flex-row justify-around">
+                        <div className="flex flex-col md:flex-row justify-between">
                             {/* Booking Start at */}
                             <div className="mb-4">
                                 <label
@@ -114,7 +170,7 @@ export default function BookingForm() {
                                             onChange={(e) => setStartDate(e.target.value)}
                                             type="datetime-local"
                                             placeholder="Select start time for your booking"
-                                            className="peer block rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
+                                            className="peer block w-full rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
                                         />
                                     </div>
                                 </div>
@@ -137,13 +193,31 @@ export default function BookingForm() {
                                             onChange={(e) => setEndDate(e.target.value)}
                                             type="datetime-local"
                                             placeholder="Select end time for your booking"
-                                            className="peer block rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
+                                            className="peer block w-full rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
                                         />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
+
+                    {shopsInCity.length > 0 && (
+                        <div className="mb-4">
+                            <label
+                                htmlFor="shop"
+                                className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-200"
+                            >
+                                Available shop in {city}
+                            </label>
+                            <SelectShop
+                                shops={shopsInCity}
+                                name="shop"
+                                onSelect={(selected) => handleShopSelected(selected)}
+                                initialeValue={selectedShop}
+                            />
+                        </div>
+                    )}
+
                     <div>
                         {availableBikes.length > 0 && (
                             <>
@@ -152,7 +226,20 @@ export default function BookingForm() {
                                     <label htmlFor="bikes" className="mb-2 block text-sm font-medium">
                                         Choose Bikes
                                     </label>
-                                    <SelectBike bikes={availableBikes} name="bikes" />
+                                    <SelectBike
+                                        key={bikeInputKey}
+                                        bikes={availableBikes.filter((bike: Bike) => {
+                                            console.log("filtering from booking-form ", bike.shop, selectedShop);
+
+                                            return selectedShop === null ? true : bike.shop === selectedShop;
+                                        })}
+                                        name="bikes"
+                                        onSelect={(selected) => handleBikeSelected(selected)}
+                                    />
+                                    {/* .filter((bike: Bike) => {
+                                            console.log(bike);
+                                            return bike.shop === selectedShop;
+                                        }) */}
                                 </div>
                             </>
                         )}
@@ -161,13 +248,38 @@ export default function BookingForm() {
                         fetchError &&
                         fetchError.length > 0 &&
                         fetchError.map((error: string, index: number) => <p key={index}>{error}</p>)}
+                    <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
+                        {errorMessage && (
+                            <>
+                                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                                <p className="text-sm text-red-500">{errorMessage}</p>
+                            </>
+                        )}
+                    </div>
                     <div className="flex mt-6">
-                        <Button type="submit" className="w-full justify-center">
-                            Book now
-                        </Button>
+                        {user ? (
+                            selectedBikes.length > 0 && <CreateBookingButton />
+                        ) : (
+                            <Button type="button" className="w-full justify-center" onClick={() => connectUser()}>
+                                You must be logged in order to finalize your booking
+                            </Button>
+                        )}
                     </div>
                 </form>
+
+                <Modal open={showConnectModal} onSubmit={closeModal} />
             </div>
         </div>
+    );
+}
+
+function CreateBookingButton() {
+    const { pending } = useFormStatus();
+
+    return (
+        <Button className="w-full justify-center group" aria-disabled={pending} type="submit">
+            <span className="flex flex-shrink-0">Book now</span>
+            <ArrowRightIcon className="ml-4 group-hover:ml-[55%] group-hover:md:ml-[75%] transform duration-300 h-5 w-5 text-gray-50" />
+        </Button>
     );
 }

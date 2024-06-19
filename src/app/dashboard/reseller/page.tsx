@@ -1,4 +1,5 @@
 import { SessionUser } from "@/app/lib/definitions";
+import ResellerForm from "@/app/ui/reseller/reseller-form";
 import { auth } from "@/auth";
 
 export default async function Page() {
@@ -11,10 +12,9 @@ export default async function Page() {
     return (
         <main>
             <h1 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-50 sm:truncate sm:text-3xl sm:tracking-tight mb-4">
-                Account
+                Reseller Settings
             </h1>
-            {/* {session && <ResellerForm user={user} />} */}
-            <div>More to come in few days...</div>
+            {session && <ResellerForm user={user} />}
         </main>
     );
 }

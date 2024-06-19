@@ -49,6 +49,14 @@ export type Booking = {
     status: string;
 }
 
+export type BookingFormData = {
+    city: string;
+    bikes: string;
+    startAt: string;
+    endAt: string;
+    shop: string;
+}
+
 export type Address = {
     housenumber: number;
     street: string;
