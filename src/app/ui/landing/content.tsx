@@ -10,11 +10,11 @@ export function Content() {
                     <div className="lg:flex lg:w-1/2 lg:shrink lg:grow-0 xl:absolute xl:inset-y-0 xl:right-1/2 xl:w-1/2">
                         <div className="relative h-80 lg:-ml-8 lg:h-auto lg:w-full lg:grow xl:ml-0">
                             <Image
-                                className="absolute inset-0 h-full w-full bg-gray-50 object-cover"
-                                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-x=.4&w=2560&h=3413&&q=80"
+                                className="absolute inset-0 h-full w-full bg-gray-50 object-cover object-center"
+                                src="https://www.urbancycle.fr/wp-content/uploads/2024/06/Bullitt-jaune-bbx-et-vitesses-internes-1.jpeg"
                                 alt=""
-                                height={450}
-                                width={200}
+                                height={750}
+                                width={700}
                             />
                         </div>
                     </div>

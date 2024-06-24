@@ -9,11 +9,11 @@ export default function Hero() {
             <div className="relative">
                 <div className="relative isolate overflow-hidden pt-14">
                     <Image
-                        width={125}
-                        height={250}
-                        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
+                        width={1025}
+                        height={2048}
+                        src="https://www.urbancycle.fr/wp-content/uploads/2024/06/Bullitt-raw-vitesses-externes-2048x2048.jpeg"
                         alt=""
-                        className="absolute inset-0 -z-10 h-full w-full object-cover"
+                        className="absolute inset-0 -z-10 h-full w-full object-cover brightness-50"
                     />
                     <div
                         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
