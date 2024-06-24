@@ -12,10 +12,10 @@ export default async function NavBar() {
         // { name: 'Company', href: '#' },
     ];
     return (
-        <header className="absolute inset-x-0 top-0 z-50">
+        <header className="absolute inset-x-0 top-0 z-40">
             <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
-                    <a href="#" className="-m-1.5 p-1.5">
+                    <a href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Loutonvélo</span>
                         {/* <Image
                             width={125}
@@ -54,14 +54,14 @@ export default async function NavBar() {
                         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
                 </div> */}
-                <div className="hidden lg:flex lg:gap-x-12">
+                {/* <div className="hidden lg:flex lg:gap-x-12">
                     {navigation.map((item) => (
                         <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-white">
                             {item.name}
                         </a>
                     ))}
-                </div>
-                {session?.user && <div className="text-white">Welcome, {session?.user.email}</div>}
+                </div> */}
+                {/* {session?.user && <div className="text-white">Welcome, {session?.user.email}</div>} */}
                 <div className="flex flex-row gap-x-12  flex-1 justify-end">
                     {/* lg:flex lg:flex-row lg:gap-x-12  lg:flex-1 lg:justify-end */}
                     {session?.user ? (

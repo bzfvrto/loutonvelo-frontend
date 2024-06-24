@@ -16,6 +16,15 @@ const formatDate = (date: Date) =>
 	).padStart(2, '0')}.${String(date.getMilliseconds()).padStart(3, '0')}`
 
 export async function fetchBike() {
+    const response = await fetch(`${backendUrl}/bikes`);
+
+    const bikes = await response.json();
+    console.log('bikes fetched', bikes.data.bikes);
+
+    return bikes;
+}
+
+export async function fetchBikeForUserShop() {
     const session = await auth()
     console.log('session', session);
 
@@ -23,7 +32,7 @@ export async function fetchBike() {
         return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
     }
 
-    const response = await fetch(`${backendUrl}/bikes`, {
+    const response = await fetch(`${backendUrl}/shops/bikes`, {
         headers: {
             "Authorization": `Bearer ${session.bearer}`
         }

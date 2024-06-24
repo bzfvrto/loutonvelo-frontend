@@ -33,6 +33,24 @@ export type Bike = {
     shop: string;
 };
 
+export type BikePopulated = {
+    _id: string;
+    name: string;
+    brand: Brand;
+    model: string;
+    seats: number;
+    availability: string;
+    pictures: Picture[];
+    year: Date;
+    color: string;
+    description: string;
+    externalLink: string;
+    floorPrice: number;
+    pricePerHour: number;
+    size: string;
+    shop: Shop;
+};
+
 export type Brand = {
     _id: string;
     name: string;

@@ -1,10 +1,10 @@
 import Table from "@/app/ui/bikes/table";
-import { fetchBike } from "@/app/lib/actions";
+import { fetchBikeForUserShop } from "@/app/lib/actions";
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
 
 export default async function Page() {
-    const bikesResponse = await fetchBike();
+    const bikesResponse = await fetchBikeForUserShop();
     console.log("bikesResponse.data.bikes", bikesResponse.data.bikes);
 
     return (

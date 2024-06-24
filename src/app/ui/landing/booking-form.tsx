@@ -122,7 +122,7 @@ export default function BookingForm({ user }: { user: null | User }) {
     };
 
     return (
-        <div className="relative bg-white dark:bg-gray-800  rounded-lg w-5/6 mx-auto">
+        <div id="bookingForm" className="relative bg-white dark:bg-gray-800  rounded-lg w-5/6 mx-auto">
             <h4 className="text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl lg:text-6xl pt-4">
                 Book a Bike
             </h4>
@@ -134,7 +134,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                             htmlFor="city"
                             className="mb-2 w-full md:mx-auto block text-sm font-medium text-gray-900 dark:text-gray-200"
                         >
-                            Enter city name then we will disply available bikes.
+                            Enter city name then we will display available bikes.
                         </label>
                         <div className="relative mt-2 rounded-md">
                             <div className="relative">

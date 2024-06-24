@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { BookingProvider } from "./contexts/BookingProvider";
+import { Banner } from "./ui/banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +17,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className="scroll-smooth">
             <body className={inter.className}>
                 {/* <BookingProvider> */}
+                <Banner
+                    title="Demo version"
+                    content="This app is for demo purpose only ! Love it? give it a star on github!"
+                    link={{ url: "https://github.com/bzfvrto", text: "let's go" }}
+                />
                 {children}
                 {/* </BookingProvider> */}
             </body>
