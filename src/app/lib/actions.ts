@@ -16,12 +16,24 @@ const formatDate = (date: Date) =>
 	).padStart(2, '0')}.${String(date.getMilliseconds()).padStart(3, '0')}`
 
 export async function fetchBike() {
-    const response = await fetch(`${backendUrl}/bikes`);
+    const response = await fetch(`${backendUrl}/bikes?limit=3`);
 
     const bikes = await response.json();
     console.log('bikes fetched', bikes.data.bikes);
 
     return bikes;
+}
+
+export async function fetchBikeById(id: string) {
+    console.log('id from actions', id);
+    const response = await fetch(`${backendUrl}/bikes/${id}`);
+
+    const bike = await response.json();
+    if (response.ok) {
+        console.log(`bike ${id} fetched`, bike.data.bike);
+        return bike;
+    }
+
 }
 
 export async function fetchBikeForUserShop() {
@@ -61,11 +73,43 @@ export async function fetchBikeAvailable(from: string, to: string, city: string)
 }
 
 export async function createBike(formData: FormData) {
-    console.log('formData', formData);
-    // console.log(rawFormData);
+    const bearer = await userBearer();
     const response = await fetch(`${backendUrl}/bikes`, {
         method: "POST",
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        },
         body: formData
+    });
+    const { data, errors }: UpsertBikeApiResponse = await response.json();
+    if (response.ok) {
+        const bike = data?.bike;
+        console.log(data);
+
+        if (bike && data.result) {
+            Object.assign(bike, {fetchedAt: formatDate(new Date())})
+            revalidatePath('/dashboard/bikes');
+            redirect('/dashboard/bikes');
+        } else {
+            return Promise.reject(new Error(`An error as occured`))
+        }
+    } else {
+        const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
+		return Promise.reject(error)
+    }
+}
+
+export async function updateBike(id: string, formData: FormData) {
+    console.log(`updating ${id} with formData`, formData);
+    const bearer = await userBearer();
+    const rawFormData = Object.fromEntries(formData.entries());
+    const response = await fetch(`${backendUrl}/bikes/${id}`, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${bearer}`
+        },
+        body: JSON.stringify(rawFormData)
     });
     const { data, errors }: UpsertBikeApiResponse = await response.json();
     if (response.ok) {
@@ -78,7 +122,7 @@ export async function createBike(formData: FormData) {
             revalidatePath('/dashboard/bikes');
             redirect('/dashboard/bikes');
         } else {
-            return Promise.reject(new Error(`An error as occured`))
+            return Promise.reject(new Error(`An error as occured updating bike ${id}`))
         }
     } else {
         const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
@@ -108,13 +152,14 @@ export async function fetchBrand() {
 }
 
 export async function createBrand(formData: FormData) {
-    // console.log('formData', formData);
+    const bearer = await userBearer();
     const rawFormData = Object.fromEntries(formData.entries());
     // console.log(rawFormData);
     const response = await fetch(`${backendUrl}/brands`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": `Bearer ${bearer}`
         },
         body: JSON.stringify(rawFormData)
     });
@@ -131,12 +176,15 @@ export async function fetchBooking(scope: "shop" | "user" = "shop") {
             "Authorization": `Bearer ${bearer}`
         }
     });
-    // console.log(response);
+    // console.log('booking response', response);
 
     const bookings = await response.json();
-    // console.log('bookings', bookings);
+    console.log('bookings', bookings, bookings.result === true);
+    console.log("//////////////////////");
+    console.log(bookings.result === true ? bookings : {bookings: []});
 
-    return bookings;
+
+    return bookings.result === true ? bookings.bookings : [];
 }
 
 export async function createBooking(prevState: string | undefined, formData: FormData) {
@@ -163,8 +211,8 @@ export async function createBooking(prevState: string | undefined, formData: For
         if (booking && data.result) {
             Object.assign(booking, {fetchedAt: formatDate(new Date())})
             // return bike;
-            revalidatePath('/dashboard/bookings');
-            redirect('/dashboard/bookings');
+            revalidatePath('/dashboard/reservations');
+            redirect('/dashboard/reservations');
         } else {
             return Promise.reject(new Error(`An error as occured`))
         }
@@ -212,7 +260,6 @@ export async function loginUser({ email, password}: {email: string, password: st
 
         if (user && data.result) {
             Object.assign(user, {loggedAt: formatDate(new Date())})
-            // return bike;
             return user;
         } else {
             return Promise.reject(new Error(`An error as occured`))
@@ -223,8 +270,7 @@ export async function loginUser({ email, password}: {email: string, password: st
     }
 }
 
-export async function register(prevState: string | undefined, formData: FormData) { // { firstName, lastName, email, password }: { firstName: string, lastName: string, email: string, password: string },
-    // console.log(firstName, lastName, email, password);
+export async function register(prevState: string | undefined, formData: FormData) {
     console.log('formData register', formData);
     const rawFormData = Object.fromEntries(formData.entries());
 
@@ -235,32 +281,22 @@ export async function register(prevState: string | undefined, formData: FormData
         },
         body: JSON.stringify(rawFormData)
     });
-    // const { data, errors }: LoginUserApiResponse = await response.json();
-    return await response.json()
-    // if (response.ok) {
-    //     const user = data?.user;
-    //     console.log('data from action', data, user);
+    const { data, errors }: LoginUserApiResponse = await response.json();
+    if (response.ok) {
+        const user = data?.user;
 
-    //     if (user && data.result) {
-    //         Object.assign(user, { loggedAt: formatDate(new Date()) })
-    //         // let fd = new FormData();
-    //         // fd.append("email", email);
-    //         // fd.append("password", password);
-    //         // await signIn("credentials", {
-    //         //     email,
-    //         //     password
-    //         // });
-    //         return user;
-    //     } else {
-    //         return Promise.reject(new Error(`An error as occured registering user`))
-    //     }
-    // } else {
-    //     const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
-	// 	return Promise.reject(error)
-    // }
+        if (user && data.result) {
+            Object.assign(user, { loggedAt: formatDate(new Date()) })
+            await authenticate('credentials', formData);
+        } else {
+            return "An error as occured registering user"
+        }
+    } else {
+        return errors?.map(e => e.message).join('\n');
+    }
 }
 
-export async function activateResellerAccount() {
+export async function activateResellerAccount(isActive: boolean) {
     const session = await auth()
     console.log('session', session);
 
@@ -268,12 +304,13 @@ export async function activateResellerAccount() {
         return Promise.reject(new Error(`You must be authenticated in order to book a bike`))
     }
 
-    const response = await fetch(`${backendUrl}/users/update-account`, {
+    const response = await fetch(`${backendUrl}/users/update-reseller-account`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": `Bearer ${session.bearer}`
         },
-        body: JSON.stringify({userId: session.user._id})
+        body: JSON.stringify({isActive})
     });
 
     const user = await response.json();
@@ -291,11 +328,14 @@ export async function fetchOwnerShop(userId: string): Promise<Shop | null> {
     const shopsResponse = await response.json();
     console.log(shopsResponse);
     if (shopsResponse.result === false) {
-        return Promise.reject(shopsResponse.errors[0])
+        return null
     }
-    console.log(shopsResponse.data.shops);
+    // console.log(shopsResponse);
 
-    return shopsResponse.data.shops.length > 0 ? shopsResponse.data.shops[0] : null;
+    // if (shopsResponse.ok && shopsResponse.) {
+        return shopsResponse.data.shops.length > 0 ? shopsResponse.data.shops[0] : null;
+    // }
+    // return Promise.resolve(null)
 }
 
 export async function fetchShopsInCity(city: string) {

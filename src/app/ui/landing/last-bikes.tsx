@@ -16,13 +16,15 @@ export default function LastBikes({ bikes, className }: { bikes: BikePopulated[]
                         <div>
                             <div aria-hidden="true" className="inset-0 overflow-hidden rounded-lg">
                                 <div className="overflow-hidden group-hover:opacity-75">
-                                    <Image
-                                        width={450}
-                                        height={450}
-                                        src={bike.pictures[0].url}
-                                        alt={`${bike.model} photography`}
-                                        className="object-cover object-center"
-                                    />
+                                    {bike.pictures[0].url && (
+                                        <Image
+                                            width={450}
+                                            height={450}
+                                            src={bike.pictures[0].url}
+                                            alt={`${bike.model} photography`}
+                                            className="object-cover object-center"
+                                        />
+                                    )}
                                 </div>
                                 <div className="absolute rounded-lg inset-0 bg-gradient-to-b from-transparent to-black opacity-50" />
                             </div>

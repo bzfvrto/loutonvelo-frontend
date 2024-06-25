@@ -23,7 +23,7 @@ const links = [
     { name: "Home", href: "/dashboard", icon: HomeIcon },
     { name: "Profil", href: "/dashboard/account", icon: UserIcon },
     { name: "Reservations", href: "/dashboard/reservations", icon: CalendarDaysIcon, role: "reseller" },
-    { name: "My shop", href: "/dashboard/reseller", icon: PresentationChartLineIcon },
+    { name: "My shop", href: "/dashboard/reseller", icon: PresentationChartLineIcon, role: "reseller" },
     {
         name: "Bikes",
         href: "/dashboard/bikes",

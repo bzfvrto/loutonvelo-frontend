@@ -3,7 +3,7 @@ import { lusitana } from "@/app/ui/fonts";
 // import Search from "@/app/ui/search";
 import { Bike, Booking } from "@/app/lib/definitions";
 
-export default async function BrandsTable({ bookings }: { bookings: Booking[] }) {
+export default async function BookingsTable({ bookings }: { bookings: Booking[] }) {
     // console.log(bookings[0].bikes);
     const bookingAmount = (booking: Booking) => {
         const duration = bookingDuration(new Date(booking.startAt).getTime(), new Date(booking.endAt).getTime());

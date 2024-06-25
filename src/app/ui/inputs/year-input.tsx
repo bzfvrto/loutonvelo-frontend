@@ -8,9 +8,10 @@ export function YearInput({ ...rest }) {
         }
         return dates;
     };
+    console.log("rest", rest);
 
     return (
-        <select {...rest} defaultValue={thisYear}>
+        <select {...rest}>
             <option value="">Select Year</option>
             {availableDate().map((date: number) => {
                 return (

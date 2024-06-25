@@ -1,5 +1,5 @@
 import { SessionUser } from "@/app/lib/definitions";
-import ResellerForm from "@/app/ui/reseller/reseller-form";
+import ResellerForm from "@/app/ui/reseller/shop-form";
 import { auth } from "@/auth";
 
 export default async function Page() {

@@ -10,7 +10,7 @@ export default async function Page() {
             <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4">
                 My Bookings
             </h1>
-            {bookings && <Table bookings={bookings.bookings} />}
+            {bookings && bookings.length > 0 && <Table bookings={bookings} />}
         </main>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Brand, Shop } from "@/app/lib/definitions";
+import { Bike, Brand, Shop } from "@/app/lib/definitions";
 import Link from "next/link";
 import {
     CheckIcon,
@@ -13,19 +13,21 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
-import { createBike } from "@/app/lib/actions";
+import { updateBike } from "@/app/lib/actions";
 import { useRef, useState, useContext, Suspense, useEffect } from "react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
 import { ShopContext } from "@/app/contexts/shopContext";
 import { YearInput } from "../inputs/year-input";
 
-export default function Form({ brands }: { brands: Brand[] }) {
+export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) {
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[]>();
     const { data } = useFormStatus();
     console.log(data);
     const { loading, shop } = useContext(ShopContext);
+    console.log("updating", bike);
+
     // const [userShop, setUserShop] = useState<Shop>();
     // useEffect(() => {
     //     console.log("in use effect ", shop);
@@ -67,8 +69,10 @@ export default function Form({ brands }: { brands: Brand[] }) {
         return <div></div>;
     }
 
+    const updateBikeWithId = updateBike.bind(null, bike._id);
+
     return (
-        <form action={createBike}>
+        <form action={updateBikeWithId}>
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
                 <input type="hidden" name="shop" value={shop._id} />
                 {/* Bike Name */}
@@ -82,6 +86,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 id="name"
                                 name="name"
                                 type="text"
+                                defaultValue={bike.name}
                                 placeholder="Enter bike name"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
@@ -97,10 +102,10 @@ export default function Form({ brands }: { brands: Brand[] }) {
                     <div className="relative">
                         <div className="mb-4">
                             <select
+                                defaultValue={bike.brand}
                                 id="brand"
                                 name="brandId"
                                 className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                defaultValue=""
                             >
                                 <option value="" disabled>
                                     Select a brand
@@ -127,6 +132,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 id="model"
                                 name="model"
                                 type="text"
+                                defaultValue={bike.model}
                                 placeholder="Enter bike model"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
@@ -147,7 +153,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 name="floorPrice"
                                 type="number"
                                 step="0.01"
-                                defaultValue={0}
+                                defaultValue={bike.floorPrice}
                                 placeholder="Enter amount for floor price"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
@@ -168,6 +174,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 name="pricePerHour"
                                 type="number"
                                 step="0.01"
+                                defaultValue={bike.pricePerHour}
                                 placeholder="Enter amount"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
@@ -188,7 +195,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 name="seats"
                                 type="number"
                                 step="1"
-                                defaultValue={1}
+                                defaultValue={bike.seats}
                                 placeholder="Enter seats"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
@@ -208,6 +215,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 id="color"
                                 name="color"
                                 type="color"
+                                defaultValue={bike.color}
                                 placeholder="Bike color"
                                 className="peer min-h-8 block rounded-md border border-gray-200 outline-2 placeholder:text-gray-500"
                             />
@@ -226,7 +234,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 id="year"
                                 name="year"
                                 type="date"
-                                defaultValue={new Date().getFullYear()}
+                                defaultValue={new Date(bike.year).getFullYear()}
                                 className="bg-gray-50 mt-2 block rounded-md border-0 py-4 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             {/* <input
@@ -251,6 +259,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                 id="size"
                                 name="size"
                                 type="text"
+                                defaultValue={bike.size}
                                 placeholder="Bike size : ex S, M, L or 45, 54, 58"
                                 className="peer block rounded-md border border-gray-200 py-4 px-4 text-sm outline-2 placeholder:text-gray-500"
                             />
@@ -270,6 +279,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                         name="availability"
                                         type="radio"
                                         value="available"
+                                        defaultChecked={bike.availability === "available"}
                                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                                     />
                                     <label
@@ -286,6 +296,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                         name="availability"
                                         type="radio"
                                         value="unavailable"
+                                        defaultChecked={bike.availability === "unavailable"}
                                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                                     />
                                     <label
@@ -301,6 +312,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                                         name="availability"
                                         type="radio"
                                         value="under_reparation"
+                                        defaultChecked={bike.availability === "under_reparation"}
                                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                                     />
                                     <label
@@ -325,6 +337,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                             <textarea
                                 id="description"
                                 name="description"
+                                defaultValue={bike.description}
                                 placeholder="Enter bike description"
                                 rows={6}
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -400,7 +413,7 @@ export default function Form({ brands }: { brands: Brand[] }) {
                     >
                         Cancel
                     </Link>
-                    <Button type="submit">Create Bike</Button>
+                    <Button type="submit">Update Bike</Button>
                 </div>
             </div>
         </form>

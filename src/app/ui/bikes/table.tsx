@@ -2,6 +2,7 @@ import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 // import Search from "@/app/ui/search";
 import { Bike } from "@/app/lib/definitions";
+import { UpdateBike } from "./buttons";
 
 export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
     return (
@@ -29,7 +30,12 @@ export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
                                                         <p>{bike.name}</p>
                                                     </div>
                                                 </div>
-                                                <p className="text-sm text-gray-500">{bike.model}</p>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">{bike.model}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-end gap-2">
+                                                <UpdateBike id={bike._id} />
                                             </div>
                                         </div>
                                     </div>
@@ -58,6 +64,9 @@ export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
                                             Price per hour
+                                        </th>
+                                        <th scope="col" className="px-3 py-5 font-medium">
+                                            Actions
                                         </th>
                                     </tr>
                                 </thead>
@@ -111,6 +120,11 @@ export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
                                             </td>
                                             <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                                                 {bike.pricePerHour}
+                                            </td>
+                                            <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                                                <div className="flex justify-end gap-3">
+                                                    <UpdateBike id={bike._id} />
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}
