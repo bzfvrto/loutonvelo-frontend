@@ -7,17 +7,23 @@ import { Button } from "@/app/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
 import { register } from "@/app/lib/actions";
 import { redirect } from "next/navigation";
+import { useActionState } from "react";
 
 export default function RegisterForm() {
-    const [errors, dispatch] = useFormState(register, undefined);
-    const handleRegistration = (payload: FormData) => {
-        console.log("here", FormData);
+    const [errorMessage, formAction, isPending] = useFormState(register, undefined);
+    // const handleRegistration = (payload: FormData) => {
+    //     console.log("here", FormData);
 
-        dispatch(payload);
-        redirect("/auth/login");
-    };
+    //     // try {
+    //     dispatch(payload);
+    //     redirect("/auth/login");
+    //     // } catch (error) {
+    //     //     console.log("myerror", error);
+
+    //     // }
+    // };
     return (
-        <form action={handleRegistration} className="space-y-3">
+        <form action={formAction} className="space-y-3">
             <div className="flex-1 rounded-lg bg-gray-50 dark:bg-gray-800 px-6 pb-4 pt-8">
                 <h1 className={`${lusitana.className} mb-3 text-2xl text-gray-900 dark:text-gray-50`}>
                     Create account.
@@ -105,10 +111,10 @@ export default function RegisterForm() {
                 </div>
                 <LoginButton />
                 <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
-                    {errors && (
+                    {errorMessage && (
                         <>
                             <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                            <p className="text-sm text-red-500">{errors}</p>
+                            <p className="text-sm text-red-500">{errorMessage}</p>
                         </>
                     )}
                 </div>
