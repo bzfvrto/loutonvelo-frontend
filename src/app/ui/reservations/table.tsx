@@ -2,8 +2,9 @@ import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 // import Search from "@/app/ui/search";
 import { Bike, Booking } from "@/app/lib/definitions";
+import { ShowReservation } from "./buttons";
 
-export default async function BookingsTable({ bookings }: { bookings: Booking[] }) {
+export default async function ReservationsTable({ bookings }: { bookings: Booking[] }) {
     // console.log(bookings[0].bikes);
     const bookingAmount = (booking: Booking) => {
         const duration = bookingDuration(new Date(booking.startAt).getTime(), new Date(booking.endAt).getTime());
@@ -24,7 +25,7 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
 
     return (
         <div className="w-full">
-            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Toutes mes bookings</h1>
+            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Toutes mes réservations</h1>
             {/* <Search placeholder="Search bookings..." /> */}
             <div className="mt-6 flow-root">
                 <div className="overflow-x-auto">
@@ -74,6 +75,9 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                         <th scope="col" className="px-3 py-5 font-medium">
                                             Montant
                                         </th>
+                                        <th scope="col" className="px-3 py-5 font-medium">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
 
@@ -101,6 +105,11 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                             </td>
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
                                                 {bookingAmount(booking)}
+                                            </td>
+                                            <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
+                                                <div className="flex justify-end gap-3">
+                                                    <ShowReservation id={booking._id} />
+                                                </div>
                                             </td>
                                             {/* <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                                                 {booking.website ? (

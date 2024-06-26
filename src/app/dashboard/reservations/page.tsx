@@ -1,8 +1,8 @@
-import Table from "@/app/ui/bookings/table";
-import { fetchBooking } from "@/app/lib/actions";
+import Table from "@/app/ui/reservations/table";
+import { fetchBookings } from "@/app/lib/actions";
 
 export default async function Page() {
-    const bookings = await fetchBooking("user");
+    const bookings = await fetchBookings("user");
     // console.log(bookings);
 
     return (

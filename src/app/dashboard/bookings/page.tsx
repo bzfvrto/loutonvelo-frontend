@@ -1,5 +1,5 @@
 import Table from "@/app/ui/bookings/table";
-import { fetchBooking } from "@/app/lib/actions";
+import { fetchBookings } from "@/app/lib/actions";
 import { ShopContext } from "@/app/contexts/shopContext";
 import { useContext } from "react";
 
@@ -8,7 +8,7 @@ export default async function Page() {
     // if (!shop) {
     //     return <div>No shop found</div>;
     // }
-    const bookings = await fetchBooking("shop");
+    const bookings = await fetchBookings("shop");
     console.log("bookings", bookings);
 
     return (

@@ -64,7 +64,9 @@ export type Booking = {
     user: User;
     startAt: Date;
     endAt: Date;
+    shop: Shop;
     status: string;
+    activationCode?: string;
 }
 
 export type BookingFormData = {

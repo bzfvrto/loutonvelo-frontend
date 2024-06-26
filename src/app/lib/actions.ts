@@ -168,7 +168,7 @@ export async function createBrand(formData: FormData) {
     redirect('/dashboard/brands');
 }
 
-export async function fetchBooking(scope: "shop" | "user" = "shop") {
+export async function fetchBookings(scope: "shop" | "user" = "shop") {
     const bearer = await userBearer();
 
     const response = await fetch(`${backendUrl}/bookings?type=${scope}`, {
@@ -185,6 +185,25 @@ export async function fetchBooking(scope: "shop" | "user" = "shop") {
 
 
     return bookings.result === true ? bookings.bookings : [];
+}
+
+export async function fetchBookingById(id: string) {
+    const bearer = await userBearer();
+    const response = await fetch(`${backendUrl}/bookings/${id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        },
+    });
+
+    const booking = await response.json();
+    console.log(booking);
+
+    if (response.ok) {
+        console.log(`booking ${id} fetched`, booking.data.booking);
+        return booking;
+    }
+
 }
 
 export async function createBooking(prevState: string | undefined, formData: FormData) {
