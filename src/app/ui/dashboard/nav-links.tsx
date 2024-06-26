@@ -22,7 +22,7 @@ import { SessionUser, User } from "@/app/lib/definitions";
 const links = [
     { name: "Home", href: "/dashboard", icon: HomeIcon },
     { name: "Mon Compte", href: "/dashboard/account", icon: UserIcon },
-    { name: "Mes Réservations", href: "/dashboard/reservations", icon: CalendarDaysIcon, role: "reseller" },
+    { name: "Mes Réservations", href: "/dashboard/reservations", icon: CalendarDaysIcon },
     { name: "Ma boutique", href: "/dashboard/reseller", icon: PresentationChartLineIcon, role: "reseller" },
     {
         name: "Mes vélos",
