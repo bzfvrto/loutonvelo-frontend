@@ -10,12 +10,12 @@ export default async function Page() {
     return (
         <main>
             <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4">
-                Bikes
+                Mes vélos
             </h1>
 
             <div className="flex justify-end">
                 <Link href="/dashboard/bikes/create">
-                    <Button type="button">Add bike</Button>
+                    <Button type="button">Ajouter un vélo</Button>
                 </Link>
             </div>
 

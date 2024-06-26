@@ -26,7 +26,7 @@ export default function RegisterForm() {
         <form action={formAction} className="space-y-3">
             <div className="flex-1 rounded-lg bg-gray-50 dark:bg-gray-800 px-6 pb-4 pt-8">
                 <h1 className={`${lusitana.className} mb-3 text-2xl text-gray-900 dark:text-gray-50`}>
-                    Create account.
+                    Créer un compte.
                 </h1>
                 <div className="w-full">
                     <div className="">
@@ -35,7 +35,7 @@ export default function RegisterForm() {
                                 className="mb-3 mt-5 block text-xs font-medium text-gray-900 dark:text-gray-100"
                                 htmlFor="firstName"
                             >
-                                First name
+                                Prénom
                             </label>
                             <div className="relative">
                                 <input
@@ -43,7 +43,7 @@ export default function RegisterForm() {
                                     id="firstName"
                                     type="text"
                                     name="firstName"
-                                    placeholder="Enter your first name"
+                                    placeholder="Jean"
                                     required
                                 />
                                 {/* <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
@@ -54,7 +54,7 @@ export default function RegisterForm() {
                                 className="mb-3 mt-5 block text-xs font-medium text-gray-900 dark:text-gray-100"
                                 htmlFor="lastName"
                             >
-                                Last Name
+                                Nom de famille
                             </label>
                             <div className="relative">
                                 <input
@@ -62,7 +62,7 @@ export default function RegisterForm() {
                                     id="lastName"
                                     type="text"
                                     name="lastName"
-                                    placeholder="Enter your last name"
+                                    placeholder="Bombeur"
                                     required
                                 />
                                 {/* <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
@@ -82,7 +82,7 @@ export default function RegisterForm() {
                                 id="email"
                                 type="email"
                                 name="email"
-                                placeholder="Enter your email address"
+                                placeholder="jean.bombeur@mail.ndd"
                                 required
                             />
                             <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -93,7 +93,7 @@ export default function RegisterForm() {
                             className="mb-3 mt-5 block text-xs font-medium text-gray-900 dark:text-gray-100"
                             htmlFor="password"
                         >
-                            Password
+                            Mot de passe
                         </label>
                         <div className="relative">
                             <input
@@ -101,7 +101,7 @@ export default function RegisterForm() {
                                 id="password"
                                 type="password"
                                 name="password"
-                                placeholder="Enter password"
+                                placeholder="Votre mot de passe super complexe"
                                 required
                                 minLength={4}
                             />
@@ -128,7 +128,7 @@ function LoginButton() {
 
     return (
         <Button className="mt-4 w-full" aria-disabled={pending}>
-            Register <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+            S&apos;inscrire <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
     );
 }

@@ -54,7 +54,7 @@ export default function Form() {
                 {/* Booking Start at */}
                 <div className="mb-4">
                     <label htmlFor="startAt" className="mb-2 block text-sm font-medium">
-                        Booking start at
+                        Jour et heure de début
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -73,7 +73,7 @@ export default function Form() {
                 {/* Booking End at */}
                 <div className="mb-4">
                     <label htmlFor="endAt" className="mb-2 block text-sm font-medium">
-                        Booking end at
+                        Jour et heure de fin
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -96,7 +96,7 @@ export default function Form() {
                         {/* Bikes bookable */}
                         <div className="mb-4">
                             <label htmlFor="bikes" className="mb-2 block text-sm font-medium">
-                                Choose Bikes
+                                Sélectionnez un vélo
                             </label>
                             <SelectBike bikes={availableBikes} name="bikes" />
                         </div>
@@ -108,9 +108,9 @@ export default function Form() {
                         href="/dashboard/bookings"
                         className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
                     >
-                        Cancel
+                        Annuler
                     </Link>
-                    <Button type="submit">Validate booking</Button>
+                    <Button type="submit">Enregistrer</Button>
                 </div>
             </div>
         </form>

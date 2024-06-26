@@ -32,7 +32,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                     {/* Shop Name */}
                     <div className="mb-4">
                         <label htmlFor="name" className="mb-2 block text-sm font-medium">
-                            Shop Name
+                            Nom de la boutique
                         </label>
                         <div className="relative mt-2 rounded-md">
                             <div className="relative">
@@ -41,7 +41,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                                     name="name"
                                     type="text"
                                     defaultValue={shop?.name}
-                                    placeholder="Enter bike name"
+                                    placeholder="Saisissez un nom pour votre shop"
                                     className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
                                 />
                                 {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
@@ -52,7 +52,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                     {/* Shop Description */}
                     <div className="mb-4">
                         <label htmlFor="description" className="mb-2 block text-sm font-medium">
-                            Shop Description
+                            Description
                         </label>
                         <div className="relative mt-2 rounded-md">
                             <div className="relative">
@@ -60,7 +60,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                                     id="description"
                                     name="description"
                                     defaultValue={shop?.description}
-                                    placeholder="Enter shop description"
+                                    placeholder="Saisissez une description de la boutique"
                                     rows={6}
                                     className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
                                 ></textarea>
@@ -72,7 +72,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                     {/* Shop Website */}
                     <div className="mb-4">
                         <label htmlFor="website" className="mb-2 block text-sm font-medium">
-                            Shop Website
+                            Site internet
                         </label>
                         <div className="relative mt-2 rounded-md">
                             <div className="relative">
@@ -81,7 +81,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                                     name="website"
                                     defaultValue={shop?.website}
                                     type="text"
-                                    placeholder="Enter shop website"
+                                    placeholder="Saisissez votre site web"
                                     className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
                                 />
                                 {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
@@ -91,7 +91,7 @@ export default function ShopForm({ user }: { user: SessionUser }) {
 
                     {/* Shop Address */}
                     <div className="mt-8">
-                        <span className="my-2 block text-sm font-medium">Shop Address</span>
+                        <span className="my-2 block text-sm font-medium">Adresse</span>
                         <Address address={shop?.address} />
                     </div>
                 </div>
@@ -100,9 +100,9 @@ export default function ShopForm({ user }: { user: SessionUser }) {
                         href="/dashboard"
                         className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
                     >
-                        Cancel
+                        Annuler
                     </Link>
-                    <Button type="submit">Save Shop</Button>
+                    <Button type="submit">Enregistrer</Button>
                 </div>
             </form>
         </div>

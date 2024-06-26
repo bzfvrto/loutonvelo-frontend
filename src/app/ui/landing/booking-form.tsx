@@ -124,7 +124,7 @@ export default function BookingForm({ user }: { user: null | User }) {
     return (
         <div id="bookingForm" className="relative bg-white dark:bg-gray-800  rounded-lg w-5/6 mx-auto">
             <h4 className="text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl lg:text-6xl pt-4">
-                Book a Bike
+                Louton<span className="font-bold">vélo</span>
             </h4>
             <div className="bg-white dark:bg-gray-800 px-6 py-8 shadow sm:rounded-lg sm:px-12">
                 <form action={handleBookingCreation}>
@@ -134,7 +134,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                             htmlFor="city"
                             className="mb-2 w-full md:mx-auto block text-sm font-medium text-gray-900 dark:text-gray-200"
                         >
-                            Enter city name then we will display available bikes.
+                            Saisissez le nom d&apos;une ville pour afficher les vélos disponibles.
                         </label>
                         <div className="relative mt-2 rounded-md">
                             <div className="relative">
@@ -144,7 +144,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                     value={city}
                                     onChange={(e) => setCity(e.target.value)}
                                     type="text"
-                                    placeholder="Search city with bookable bike"
+                                    placeholder="Recherchez une ville avec des vélos à louer"
                                     className="peer w-full md:mx-auto block rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
                                 />
                             </div>
@@ -159,7 +159,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                     htmlFor="startAt"
                                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-200"
                                 >
-                                    Booking start at
+                                    Jour et heure de début
                                 </label>
                                 <div className="relative mt-2 rounded-md">
                                     <div className="relative">
@@ -169,7 +169,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                             value={startDate}
                                             onChange={(e) => setStartDate(e.target.value)}
                                             type="datetime-local"
-                                            placeholder="Select start time for your booking"
+                                            placeholder="Choisissez un jour et une heure de début"
                                             className="peer block w-full rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
                                         />
                                     </div>
@@ -182,7 +182,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                     htmlFor="endAt"
                                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-200"
                                 >
-                                    Booking end at
+                                    Jour et heure de fin
                                 </label>
                                 <div className="relative mt-2 rounded-md">
                                     <div className="relative">
@@ -192,7 +192,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                             value={endDate}
                                             onChange={(e) => setEndDate(e.target.value)}
                                             type="datetime-local"
-                                            placeholder="Select end time for your booking"
+                                            placeholder="Choisissez un jour et une heure de fin"
                                             className="peer block w-full rounded-md border border-gray-200 py-2 px-5 text-sm outline-2 placeholder:text-gray-500 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200"
                                         />
                                     </div>
@@ -207,7 +207,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                 htmlFor="shop"
                                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-200"
                             >
-                                Available shop in {city}
+                                Lieux de location à {city}
                             </label>
                             <SelectShop
                                 shops={shopsInCity}
@@ -224,7 +224,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                                 {/* Bikes bookable */}
                                 <div className="mb-4">
                                     <label htmlFor="bikes" className="mb-2 block text-sm font-medium">
-                                        Choose Bikes
+                                        Choisissez un vélo
                                     </label>
                                     <SelectBike
                                         key={bikeInputKey}
@@ -261,7 +261,7 @@ export default function BookingForm({ user }: { user: null | User }) {
                             selectedBikes.length > 0 && <CreateBookingButton />
                         ) : (
                             <Button type="button" className="w-full justify-center" onClick={() => connectUser()}>
-                                You must be logged in order to finalize your booking
+                                Vous devez être connecté afin de finaliser votre réservation.
                             </Button>
                         )}
                     </div>
@@ -278,7 +278,7 @@ function CreateBookingButton() {
 
     return (
         <Button className="w-full justify-center group" aria-disabled={pending} type="submit">
-            <span className="flex flex-shrink-0">Book now</span>
+            <span className="flex flex-shrink-0">Réserver maintenant</span>
             <ArrowRightIcon className="ml-4 group-hover:ml-[55%] group-hover:md:ml-[75%] transform duration-300 h-5 w-5 text-gray-50" />
         </Button>
     );

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function AcmeLogo() {
     return (
         <div className={`flex flex-col items-center leading-none text-white`}>
-            <div className="flex items-center justify-center w-24 h-24">
+            <div className="hidden md:flex items-center justify-center w-24 h-24">
                 <div className=" text-gray-500">
                     <svg className="w-full h-auto" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="140" r="40" stroke="white" strokeWidth="6" fill="none" />

@@ -10,11 +10,11 @@ export default async function Page() {
     return (
         <main>
             <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight mb-4">
-                Brands
+                Les marques de mon shop
             </h1>
             <div className="flex justify-end">
                 <Link href="/dashboard/brands/create">
-                    <Button type="button">Add brand</Button>
+                    <Button type="button">Ajouter une marque</Button>
                 </Link>
             </div>
             {brands && <Table brands={brands.brands} />}

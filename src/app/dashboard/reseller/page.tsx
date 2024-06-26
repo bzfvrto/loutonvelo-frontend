@@ -12,7 +12,7 @@ export default async function Page() {
     return (
         <main>
             <h1 className="text-2xl font-bold leading-7 text-gray-900 dark:text-gray-50 sm:truncate sm:text-3xl sm:tracking-tight mb-4">
-                Reseller Settings
+                Réglage du shop
             </h1>
             {session && <ResellerForm user={user} />}
         </main>

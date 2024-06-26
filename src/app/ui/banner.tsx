@@ -66,7 +66,7 @@ export function Banner({
                     className="-m-3 p-3 focus-visible:outline-offset-[-4px]"
                     onClick={() => setVisible(false)}
                 >
-                    <span className="sr-only">Dismiss</span>
+                    <span className="sr-only">Masquer</span>
                     <div className="rounded-md border border-transparent hover:border-gray-200 hover:shadow-inner">
                         <XMarkIcon className="h-5 w-5 text-gray-900" aria-hidden="true" />
                     </div>

@@ -24,9 +24,9 @@ export function ToggleReseller({ user }: { user: SessionUser }) {
         <div className="flex items-center justify-between">
             <span className="flex flex-grow flex-col">
                 <label className="text-sm font-medium leading-6 text-gray-900 dark:text-gray-400">
-                    Activate reseller account
+                    Activer votre compte loueur
                 </label>
-                <p className="text-sm text-gray-500">Activate this options if you some bike to rent.</p>
+                <p className="text-sm text-gray-500">Activer cette option si vous voulez louer votre vélo.</p>
             </span>
             <button
                 type="button"

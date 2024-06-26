@@ -5,7 +5,7 @@ export default function LastBikes({ bikes, className }: { bikes: BikePopulated[]
     return (
         <section aria-labelledby="collection-heading" className={`${className}`}>
             <div className="border-b border-gray-200 pb-5 mb-4 px-8 mt-12 bg-gradient-to-b from-transparent to-white">
-                <h3 className="text-base font-semibold leading-6 text-gray-900 pt-2">Last Bikes added</h3>
+                <h3 className="text-base font-semibold leading-6 text-gray-900 pt-2">Les derniers vélos proposés</h3>
             </div>
             <div className="mx-auto grid max-w-md grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 sm:px-6 lg:gap-x-8 lg:px-8">
                 {bikes.map((bike) => (
@@ -39,7 +39,7 @@ export default function LastBikes({ bikes, className }: { bikes: BikePopulated[]
 
                                     <div className="text-sm text-white">
                                         <div>{bike.brand.name}</div>
-                                        <div>Available at: {bike.shop.name}</div>
+                                        <div>Disponible chez: {bike.shop.name}</div>
                                         <p className="text-gray-300 italic">{bike.description}</p>
                                     </div>
                                 </div>

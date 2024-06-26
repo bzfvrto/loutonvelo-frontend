@@ -37,7 +37,7 @@ export default function Address({
             {/* Street Address */}
             <div className="mb-4">
                 <label htmlFor="street" className="mb-2 block text-sm font-medium">
-                    Street
+                    Rue et numéro
                 </label>
                 <div className="relative mt-2 rounded-md">
                     <div className="relative">
@@ -46,7 +46,7 @@ export default function Address({
                             name="street"
                             defaultValue={address?.street}
                             type="text"
-                            placeholder="171 MessFam avenue"
+                            placeholder="171 avenue MessFam"
                             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:border-gray-400 bg-gray-50 dark:bg-gray-600 text-gray-900 dark:text-gray-200"
                         />
                     </div>
@@ -57,7 +57,7 @@ export default function Address({
                 {/* Postal Code */}
                 <div className="mb-4">
                     <label htmlFor="postcode" className="mb-2 block text-sm font-medium">
-                        Postal Code
+                        Code postal
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -76,7 +76,7 @@ export default function Address({
                 {/* City */}
                 <div className="mb-4">
                     <label htmlFor="city" className="mb-2 block text-sm font-medium">
-                        City
+                        Ville
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -95,7 +95,7 @@ export default function Address({
                 {/* Country */}
                 <div className="mb-4">
                     <label htmlFor="country" className="mb-2 block text-sm font-medium">
-                        Country
+                        Pays
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">

@@ -70,7 +70,7 @@ export default async function NavBar() {
                                 href="/dashboard"
                                 className="text-sm font-semibold leading-6 text-white hover:text-gray-300 hover:ring-2 hover:ring-pink-800 hover:ring-offset-1 rounded-lg px-2 py-1"
                             >
-                                Dashboard
+                                Tableau de bord
                             </Link>
                         </div>
                     ) : (
@@ -80,7 +80,7 @@ export default async function NavBar() {
                                     href="/auth/register"
                                     className="text-sm font-semibold leading-6 text-white hover:text-gray-300 hover:ring-2 hover:ring-pink-800 hover:ring-offset-1 rounded-lg px-2 py-1"
                                 >
-                                    Register
+                                    S&apos;inscrire
                                 </Link>
                             </div>
                             <div className="">
@@ -88,7 +88,7 @@ export default async function NavBar() {
                                     href="/auth/login"
                                     className="text-sm font-semibold leading-6 text-white  hover:text-gray-300 hover:ring-2 hover:ring-pink-800 hover:ring-offset-1 rounded-lg px-2 py-1"
                                 >
-                                    Log in <span aria-hidden="true">&rarr;</span>
+                                    Se connecter <span aria-hidden="true">&rarr;</span>
                                 </Link>
                             </div>
                         </>

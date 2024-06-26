@@ -7,7 +7,7 @@ import { UpdateBike } from "./buttons";
 export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
     return (
         <div className="w-full">
-            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Bikes</h1>
+            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Vélos</h1>
             {/* <Search placeholder="Search bikes..." /> */}
             <div className="mt-6 flow-root">
                 <div className="overflow-x-auto">
@@ -45,25 +45,25 @@ export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
                                 <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
                                     <tr>
                                         <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                                            Name
+                                            Nom
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Model
+                                            Modèle
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
                                             Description
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Availability
+                                            Disponibilité
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Details
+                                            Détails
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Floor Price
+                                            Prix plancher
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Price per hour
+                                            Tarif horaire
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
                                             Actions
@@ -98,11 +98,11 @@ export default async function BrandsTable({ bikes }: { bikes: Bike[] }) {
                                             <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                                                 <ul>
                                                     <li className="mb-1">
-                                                        <span className="font-medium">Year : </span>{" "}
+                                                        <span className="font-medium">Année : </span>{" "}
                                                         {new Date(bike.year).toLocaleDateString()}
                                                     </li>
                                                     <li>
-                                                        <span className="font-medium">Color : </span>{" "}
+                                                        <span className="font-medium">Couleur : </span>{" "}
                                                         <span
                                                             style={{
                                                                 backgroundColor: bike.color,

@@ -20,9 +20,11 @@ export function Content() {
                     </div>
                     <div className="px-6 lg:contents">
                         <div className="mx-auto max-w-2xl pb-24 pt-16 sm:pb-32 sm:pt-20 lg:ml-8 lg:mr-0 lg:w-full lg:max-w-lg lg:flex-none lg:pt-32 xl:w-1/2">
-                            <p className="text-base font-semibold leading-7 text-indigo-600">Loutonvélo</p>
+                            <p className="text-base font-semibold leading-7 text-indigo-600">
+                                Louton<span className="font-bold">vélo</span>
+                            </p>
                             <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                Find a bike anywhere
+                                Louez un vélo n&apos;importe où
                             </h1>
                             <p className="mt-6 text-xl leading-8 text-gray-700">
                                 Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi,
@@ -44,7 +46,9 @@ export function Content() {
                                             aria-hidden="true"
                                         />
                                         <span>
-                                            <strong className="font-semibold text-gray-900">Trusted renters.</strong>{" "}
+                                            <strong className="font-semibold text-gray-900">
+                                                Des loueurs certifiés.
+                                            </strong>{" "}
                                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
                                             cupidatat commodo.
                                         </span>
@@ -56,7 +60,7 @@ export function Content() {
                                         />
                                         <span>
                                             <strong className="font-semibold text-gray-900">
-                                                Communicate with renter.
+                                                Communiquer avec les loueurs.
                                             </strong>{" "}
                                             Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit
                                             morbi lobortis.
@@ -70,7 +74,7 @@ export function Content() {
                                     tempor et ut. Ac lorem vel integer orci.
                                 </p>
                                 <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-                                    Never be without bike!
+                                    Ne soyez jamais sans vélo!
                                 </h2>
                                 <p className="mt-6">
                                     Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis

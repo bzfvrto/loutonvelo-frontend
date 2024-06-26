@@ -29,7 +29,7 @@ export function Modal({ open, onSubmit }: { open: boolean; onSubmit: () => void 
                                     </svg>
                                 </div> */}
                                 <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-                                    Connect to finish your booking
+                                    Connectez vous pour finaliser votre réservation
                                 </h3>
                                 {/* <div className="mt-2">
                                     <p className="text-sm text-gray-500">
@@ -58,7 +58,7 @@ export function Modal({ open, onSubmit }: { open: boolean; onSubmit: () => void 
                                 type="button"
                                 className="mt-3 inline-flex w-full justify-center rounded-md bg-red-400 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-span-2 sm:mt-0"
                             >
-                                Close
+                                Fermer
                             </button>
                         </div>
                         <div className="mt-2">

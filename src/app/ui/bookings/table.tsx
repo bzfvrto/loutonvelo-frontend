@@ -24,7 +24,7 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
 
     return (
         <div className="w-full">
-            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Bookings</h1>
+            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Toutes mes réservations</h1>
             {/* <Search placeholder="Search bookings..." /> */}
             <div className="mt-6 flow-root">
                 <div className="overflow-x-auto">
@@ -66,13 +66,13 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                 <thead className="rounded-md bg-gray-50 dark:bg-gray-800 text-left text-sm font-normal">
                                     <tr>
                                         <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                                            User Name
+                                            Nom de l&apos;utilisateur
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Period
+                                            Période
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
-                                            Amount
+                                            Montant
                                         </th>
                                     </tr>
                                 </thead>
@@ -96,7 +96,7 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                                 </div>
                                             </td>
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
-                                                From : {new Date(booking.startAt).toLocaleString()} To :{" "}
+                                                De : {new Date(booking.startAt).toLocaleString()} a :{" "}
                                                 {new Date(booking.endAt).toLocaleString()}
                                             </td>
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">

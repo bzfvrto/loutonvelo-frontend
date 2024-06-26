@@ -78,7 +78,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike Name */}
                 <div className="mb-4">
                     <label htmlFor="name" className="mb-2 block text-sm font-medium">
-                        Bike Name
+                        Nom du vélo
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -87,7 +87,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 name="name"
                                 type="text"
                                 defaultValue={bike.name}
-                                placeholder="Enter bike name"
+                                placeholder="Saisissez un nom pour le vélo"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
                             {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
@@ -97,7 +97,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
 
                 <div className="mb-4">
                     <label htmlFor="brand" className="mb-2 block text-sm font-medium">
-                        Choose brands
+                        Marque du vélo
                     </label>
                     <div className="relative">
                         <div className="mb-4">
@@ -108,7 +108,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             >
                                 <option value="" disabled>
-                                    Select a brand
+                                    Sélectionner une marque
                                 </option>
                                 {brands.map((brand) => (
                                     <option key={brand._id} value={brand._id}>
@@ -124,7 +124,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike Model */}
                 <div className="mb-4">
                     <label htmlFor="model" className="mb-2 block text-sm font-medium">
-                        Bike Model
+                        Modèle
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -133,7 +133,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 name="model"
                                 type="text"
                                 defaultValue={bike.model}
-                                placeholder="Enter bike model"
+                                placeholder="Saisissez le modèle du vélo"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
                             {/* <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
@@ -144,7 +144,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Floor price */}
                 <div className="mb-4">
                     <label htmlFor="floorPrice" className="mb-2 block text-sm font-medium">
-                        Floor Price
+                        Prix de base
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -154,7 +154,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 type="number"
                                 step="0.01"
                                 defaultValue={bike.floorPrice}
-                                placeholder="Enter amount for floor price"
+                                placeholder="Saisissez un montant minimum"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
                             <CurrencyEuroIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -165,7 +165,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Price per hour */}
                 <div className="mb-4">
                     <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
-                        Price per hour
+                        Tarif horaire
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -175,7 +175,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 type="number"
                                 step="0.01"
                                 defaultValue={bike.pricePerHour}
-                                placeholder="Enter amount"
+                                placeholder="Saisissez le prix à l'heure"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
                             <CurrencyEuroIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -186,7 +186,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike seats */}
                 <div className="mt-2 mb-4">
                     <label htmlFor="pricePerHour" className="mb-2 block text-sm font-medium">
-                        Seats
+                        Nombre de place
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -196,7 +196,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 type="number"
                                 step="1"
                                 defaultValue={bike.seats}
-                                placeholder="Enter seats"
+                                placeholder="Saisissez le nombre de place"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             />
                             <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -207,7 +207,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike color */}
                 <div className="mb-4">
                     <label htmlFor="color" className="mb-2 block text-sm font-medium">
-                        Color
+                        Couleur
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -216,7 +216,6 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 name="color"
                                 type="color"
                                 defaultValue={bike.color}
-                                placeholder="Bike color"
                                 className="peer min-h-8 block rounded-md border border-gray-200 outline-2 placeholder:text-gray-500"
                             />
                         </div>
@@ -226,7 +225,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike date */}
                 <div className="mb-4">
                     <label htmlFor="year" className="mb-2 block text-sm font-medium">
-                        Bike release year
+                        Année de fabrication
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -251,7 +250,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike Size */}
                 <div className="mb-4">
                     <label htmlFor="year" className="mb-2 block text-sm font-medium">
-                        Size
+                        Taille
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -260,7 +259,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 name="size"
                                 type="text"
                                 defaultValue={bike.size}
-                                placeholder="Bike size : ex S, M, L or 45, 54, 58"
+                                placeholder="Ex S, M, L or 45, 54, 58"
                                 className="peer block rounded-md border border-gray-200 py-4 px-4 text-sm outline-2 placeholder:text-gray-500"
                             />
                         </div>
@@ -270,7 +269,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike availability */}
                 <div className="mb-4">
                     <fieldset>
-                        <legend className="mb-2 block text-sm font-medium">Bike current status</legend>
+                        <legend className="mb-2 block text-sm font-medium">Status du vélo</legend>
                         <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
                             <div className="flex gap-4">
                                 <div className="flex items-center">
@@ -286,7 +285,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                         htmlFor="available"
                                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
                                     >
-                                        Available <CheckIcon className="h-4 w-4" />
+                                        Disponible <CheckIcon className="h-4 w-4" />
                                     </label>
                                 </div>
 
@@ -303,7 +302,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                         htmlFor="unavailable"
                                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-500 px-3 py-1.5 text-xs font-medium text-white"
                                     >
-                                        Unavailable <XMarkIcon className="h-4 w-4" />
+                                        Indisponible <XMarkIcon className="h-4 w-4" />
                                     </label>
                                 </div>
                                 <div className="flex items-center">
@@ -319,7 +318,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                         htmlFor="underReparation"
                                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
                                     >
-                                        Under Reparation <ClockIcon className="h-4 w-4" />
+                                        En réparation <ClockIcon className="h-4 w-4" />
                                     </label>
                                 </div>
                             </div>
@@ -330,7 +329,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike Decription */}
                 <div className="mb-4">
                     <label htmlFor="description" className="mb-2 block text-sm font-medium">
-                        Bike Description
+                        Description
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
@@ -338,7 +337,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                                 id="description"
                                 name="description"
                                 defaultValue={bike.description}
-                                placeholder="Enter bike description"
+                                placeholder="Saisissez une description"
                                 rows={6}
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                             ></textarea>
@@ -350,7 +349,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                 {/* Bike Pictures */}
                 <div className="mb-4">
                     <label htmlFor="description" className="mb-2 block text-sm font-medium">
-                        Bike Pictures
+                        Photographies
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <input
@@ -368,7 +367,7 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                             onClick={handleFileBtnClick}
                             aria-label="file upload"
                         >
-                            Upload file
+                            Ajouter des photos
                         </button>
                         <div className="relative">
                             {files && files.length > 0 && (
@@ -411,9 +410,9 @@ export default function Form({ bike, brands }: { bike: Bike; brands: Brand[] }) 
                         href="/dashboard/bikes"
                         className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
                     >
-                        Cancel
+                        Annuler
                     </Link>
-                    <Button type="submit">Update Bike</Button>
+                    <Button type="submit">Mettre à jour le vélo</Button>
                 </div>
             </div>
         </form>

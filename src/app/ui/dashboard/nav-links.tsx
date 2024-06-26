@@ -21,16 +21,16 @@ import { SessionUser, User } from "@/app/lib/definitions";
 // Depending on the size of the application, this would be stored in a database.
 const links = [
     { name: "Home", href: "/dashboard", icon: HomeIcon },
-    { name: "Profil", href: "/dashboard/account", icon: UserIcon },
-    { name: "Reservations", href: "/dashboard/reservations", icon: CalendarDaysIcon, role: "reseller" },
-    { name: "My shop", href: "/dashboard/reseller", icon: PresentationChartLineIcon, role: "reseller" },
+    { name: "Mon Compte", href: "/dashboard/account", icon: UserIcon },
+    { name: "Mes Réservations", href: "/dashboard/reservations", icon: CalendarDaysIcon, role: "reseller" },
+    { name: "Ma boutique", href: "/dashboard/reseller", icon: PresentationChartLineIcon, role: "reseller" },
     {
-        name: "Bikes",
+        name: "Mes vélos",
         href: "/dashboard/bikes",
         icon: Cog6ToothIcon,
         role: "reseller",
     },
-    { name: "Brands", href: "/dashboard/brands", icon: SwatchIcon, role: "reseller" },
+    { name: "Mes marques", href: "/dashboard/brands", icon: SwatchIcon, role: "reseller" },
     { name: "Bookings", href: "/dashboard/bookings", icon: ClipboardDocumentListIcon, role: "reseller" },
 ];
 

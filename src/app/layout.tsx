@@ -22,8 +22,8 @@ export default function RootLayout({
                 {/* <BookingProvider> */}
                 <Banner
                     title="Demo version"
-                    content="This app is for demo purpose only ! Love it? give it a star on github!"
-                    link={{ url: "https://github.com/bzfvrto", text: "let's go" }}
+                    content="Cette application est à but démonstratif uniquement ! Vous l'aimez ? Donnez lui une étoile sur github!"
+                    link={{ url: "https://github.com/bzfvrto", text: "C'est parti" }}
                 />
                 {children}
                 {/* </BookingProvider> */}

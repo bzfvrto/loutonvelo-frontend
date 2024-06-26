@@ -80,12 +80,12 @@ export default function SelectBike({
                                 </p>
                                 <div className="flex flex-row w-full justify-between pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-600 mt-1">
                                     <div className="text-sm font-light mx-2 text-gray-500 dark:text-gray-400">
-                                        Size: <span>{bike.size}</span>
+                                        Taille: <span>{bike.size}</span>
                                     </div>
                                     <div className="flex flex-row">
                                         {/* <UserIcon className="pointer-events-none left-3 mt-1 h-4 w-4 text-gray-500 dark:text-gray-400 peer-focus:text-gray-900" /> */}
                                         <span className="text-sm font-light mx-2 text-gray-500 dark:text-gray-400">
-                                            Seats: {bike.seats}
+                                            Nbre place: {bike.seats}
                                         </span>
                                     </div>
                                 </div>
