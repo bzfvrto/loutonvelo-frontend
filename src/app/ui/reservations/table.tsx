@@ -76,6 +76,9 @@ export default async function ReservationsTable({ bookings }: { bookings: Bookin
                                             Montant
                                         </th>
                                         <th scope="col" className="px-3 py-5 font-medium">
+                                            Status
+                                        </th>
+                                        <th scope="col" className="px-3 py-5 font-medium">
                                             Actions
                                         </th>
                                     </tr>
@@ -105,6 +108,9 @@ export default async function ReservationsTable({ bookings }: { bookings: Bookin
                                             </td>
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
                                                 {bookingAmount(booking)}
+                                            </td>
+                                            <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
+                                                {booking.status}
                                             </td>
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
                                                 <div className="flex justify-end gap-3">

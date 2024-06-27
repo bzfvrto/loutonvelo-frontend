@@ -2,6 +2,8 @@ import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 // import Search from "@/app/ui/search";
 import { Bike, Booking } from "@/app/lib/definitions";
+import { ActivateBookingBtn } from "./buttons";
+import clsx from "clsx";
 
 export default async function BookingsTable({ bookings }: { bookings: Booking[] }) {
     // console.log(bookings[0].bikes);
@@ -24,7 +26,7 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
 
     return (
         <div className="w-full">
-            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Toutes mes bookings</h1>
+            <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>Tous mes bookings</h1>
             {/* <Search placeholder="Search bookings..." /> */}
             <div className="mt-6 flow-root">
                 <div className="overflow-x-auto">
@@ -55,7 +57,12 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                                             At : {new Date(booking.startAt).toLocaleString()}
                                                         </p>
                                                     </div>
-                                                    <p className="text-sm text-gray-500">{booking.status}</p>
+                                                    <div>
+                                                        <p className="text-sm text-gray-500">{booking.status}</p>
+                                                        <div className="flex justify-end gap-3 mt-2">
+                                                            <ActivateBookingBtn id={booking._id} />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,12 +81,25 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                         <th scope="col" className="px-3 py-5 font-medium">
                                             Montant
                                         </th>
+                                        <th scope="col" className="px-3 py-5 font-medium">
+                                            Status
+                                        </th>
+                                        <th scope="col" className="px-3 py-5 font-medium">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
 
                                 <tbody className="divide-y divide-gray-200 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
                                     {bookings.map((booking) => (
-                                        <tr key={booking._id} className="group">
+                                        <tr
+                                            key={booking._id}
+                                            className={clsx("group", {
+                                                " opacity-25":
+                                                    booking.status === "finished" ||
+                                                    new Date(booking.startAt).getTime() < Date.now(),
+                                            })}
+                                        >
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 py-5 pl-4 pr-3 text-sm text-black dark:text-white group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
                                                 <div className="flex items-center gap-3">
                                                     {/* <Image
@@ -101,6 +121,14 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                             </td>
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
                                                 {bookingAmount(booking)}
+                                            </td>
+                                            <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
+                                                {booking.status}
+                                            </td>
+                                            <td className="whitespace-nowrap bg-white dark:bg-gray-900 px-4 py-5 text-sm">
+                                                <div className="flex justify-end gap-3">
+                                                    <ActivateBookingBtn id={booking._id} />
+                                                </div>
                                             </td>
                                             {/* <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                                                 {booking.website ? (

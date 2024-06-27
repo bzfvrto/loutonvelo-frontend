@@ -187,7 +187,7 @@ export async function fetchBookings(scope: "shop" | "user" = "shop") {
     return bookings.result === true ? bookings.bookings : [];
 }
 
-export async function fetchBookingById(id: string) {
+export async function fetchReservationById(id: string) {
     const bearer = await userBearer();
     const response = await fetch(`${backendUrl}/bookings/${id}`, {
         method: "GET",
@@ -200,10 +200,27 @@ export async function fetchBookingById(id: string) {
     console.log(booking);
 
     if (response.ok) {
-        console.log(`booking ${id} fetched`, booking.data.booking);
+        console.log(`reservation ${id} fetched`, booking.data.booking);
         return booking;
     }
 
+}
+
+export async function fetchBookingByIdForShop(id: string) {
+    const bearer = await userBearer();
+    const response = await fetch(`${backendUrl}/shops/bookings/${id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        },
+    });
+
+    const booking = await response.json();
+
+    if (response.ok) {
+        console.log(`booking ${id} fetched`, booking.data.booking);
+        return booking;
+    }
 }
 
 export async function createBooking(prevState: string | undefined, formData: FormData) {
@@ -238,6 +255,46 @@ export async function createBooking(prevState: string | undefined, formData: For
     } else {
         const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
 		return Promise.reject(error)
+    }
+}
+
+export async function activateBooking(id: string) {
+    console.log(`activating booking ${id}`);
+    const bearer = await userBearer();
+    const response = await fetch(`${backendUrl}/shops/bookings/${id}/start`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        },
+    });
+
+    const activeBooking = await response.json();
+
+    if (response.ok) {
+        console.log(`booking ${id} fetched`, activeBooking.data.booking);
+        revalidatePath('/dashboard/bookings/[id]/activation', 'page');
+        // redirect(`/dashboard/bookings/${id}/activation`);
+        return activeBooking.data.booking;
+    }
+}
+
+export async function terminateBooking(id: string) {
+    console.log(`terminating booking ${id}`);
+    const bearer = await userBearer();
+    const response = await fetch(`${backendUrl}/shops/bookings/${id}/close`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        },
+    });
+
+    const closedBooking = await response.json();
+
+    if (response.ok) {
+        console.log(`booking ${id} is closed`, closedBooking.data.booking);
+        revalidatePath(`/dashboard/bookings/${id}/activation`, 'page');
+        // redirect(`/dashboard/bookings/${id}/activation`);
+        return closedBooking.data.booking;
     }
 }
 

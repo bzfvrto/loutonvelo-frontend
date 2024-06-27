@@ -1,9 +1,9 @@
-import { fetchBookingById } from "@/app/lib/actions";
+import { fetchReservationById } from "@/app/lib/actions";
 import ReservationDetails from "@/app/ui/reservations/details";
 
 export default async function ReservationDetail({ params }: { params: { id: string } }) {
     const id = params.id;
-    const reservation = await fetchBookingById(id);
+    const reservation = await fetchReservationById(id);
     console.log("resa is", reservation);
 
     return (
