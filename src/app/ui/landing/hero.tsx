@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NavBar from "./nav-bar";
+import NavBar from "../nav-bar";
 import Link from "next/link";
 
 export default function Hero() {
