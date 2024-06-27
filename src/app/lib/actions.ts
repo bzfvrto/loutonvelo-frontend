@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { Brand, LoginUserApiResponse, Shop, ShopApiResponse, UpsertBikeApiResponse, UpsertBookingApiResponse, UpsertShopApiResponse } from './definitions';
+import { BookingsApiResponse, Brand, LoginUserApiResponse, Shop, ShopApiResponse, UpsertBikeApiResponse, UpsertBookingApiResponse, UpsertShopApiResponse } from './definitions';
 import { auth, signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
@@ -220,6 +220,28 @@ export async function fetchBookingByIdForShop(id: string) {
     if (response.ok) {
         console.log(`booking ${id} fetched`, booking.data.booking);
         return booking;
+    }
+}
+
+export async function fetchBookingForShopByDate(date: Date) {
+    console.log(`Fetching booking for ${date}`);
+    const bearer = await userBearer();
+    const response = await fetch(`${backendUrl}/shops/bookings`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${bearer}`
+        },
+    });
+
+    const {data: bookings, errors}: BookingsApiResponse = await response.json();
+    console.log(bookings);
+
+    if (response.ok) {
+        console.log(`bookings fetched for ${date}`, bookings);
+        return bookings;
+    } else {
+        const error = new Error(errors?.map(e => e.message).join('\n') ?? 'unknown')
+        return Promise.reject(error);
     }
 }
 
