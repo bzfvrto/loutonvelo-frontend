@@ -7,7 +7,7 @@ export default function AboutUs() {
     const spreadTheWords = [
         {
             howTo: "Star it on github",
-            link: "https://github.com/bzfvrto",
+            link: "https://github.com/bzfvrto/loutonvelo-frontend",
             icon: (props: SVGProps<SVGSVGElement>) => (
                 <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
                     <path
