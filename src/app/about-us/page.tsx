@@ -116,7 +116,8 @@ export default function AboutUs() {
                                 Les images utilisés pour illustrer ce site ont été gracieusement fournie par{" "}
                                 <a
                                     href="https://urbancycle.fr"
-                                    rel="le site de Urban cycle coursier à vélo à Paris"
+                                    rel="le site d'Urban cycle coursiers à vélo à Paris"
+                                    target="_blank"
                                     className="font-medium"
                                 >
                                     Urban Cyle
@@ -126,6 +127,7 @@ export default function AboutUs() {
                                 <a
                                     href="https://www.romainabeille.com"
                                     rel="site de photographies de Romain Abeille"
+                                    target="_blank"
                                     className="font-medium"
                                 >
                                     Romain Abeille
@@ -149,11 +151,13 @@ export default function AboutUs() {
                             />
                             <div className="w-full flex-auto">
                                 <h2 className="text-3xl font-medium tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                                    Vous aimez le Louton<span className="font-bold">vélo</span> ?
+                                    Vous aimez Louton<span className="font-bold">vélo</span> ?
                                 </h2>
-                                <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                                    Faites le moi savoir. Vos réactions déterminerons l&apos;avenir de cette
-                                    application.
+                                <p className="mt-6 text-lg leading-8 text-gray-400 dark:text-gray-600">
+                                    Faites le moi savoir.
+                                </p>
+                                <p className="text-lg leading-8 text-gray-600 dark:text-gray-300">
+                                    Vos réactions déterminerons l&apos;avenir de cette application.
                                 </p>
                                 <ul
                                     role="list"

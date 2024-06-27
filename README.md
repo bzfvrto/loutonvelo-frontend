@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Loutonvélo : The bike rental solution for individuals and professionals.
 
-## Getting Started
+## About Loutonvélo
 
-First, run the development server:
+Loutonvélo aims to revolutionize bike rental between individuals by connecting the different parties. This Repository contain the frontend application for Loutonvélo.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Roadmap for Loutonvélo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Totally empty ! 😬
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- ## Loutonvélo Sponsors
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+I'm the only one working on this project. If you want some improvement on Loutonvélo. You can support me throught sponsorship. -->
 
-## Learn More
+## Security Vulnerabilities
 
-To learn more about Next.js, take a look at the following resources:
+If you discover a security vulnerability within Loutonvélo, please contact me. All security vulnerabilities will be promptly addressed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- ## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Loutonvélo is closed source at this moment, we will opensource codebase when we have enough customers. -->
 
-## Deploy on Vercel
+## Thanks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I'm gratefull to all OSS mainteners.

@@ -52,9 +52,9 @@ export default function Hero() {
                                 >
                                     C&apos;est parti
                                 </Link>
-                                <a href="#" className="text-sm font-semibold leading-6 text-white">
+                                <Link href="/about-us" className="text-sm font-semibold leading-6 text-white">
                                     En savoir plus <span aria-hidden="true">→</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ export default function RootLayout({
                 {/* <BookingProvider> */}
                 <Banner
                     title="Demo version"
-                    content="Cette application est à but démonstratif uniquement ! Vous l'aimez ? Donnez lui une étoile sur github!"
+                    content="Cette application est à but démonstratif uniquement ! Vous l'aimez ? Mettez lui une étoile sur github!"
                     link={{ url: "https://github.com/bzfvrto", text: "C'est parti" }}
                 />
                 {children}

@@ -36,7 +36,11 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                 {bookings?.map((booking) => (
                                     <div
                                         key={booking._id}
-                                        className="mb-2 w-full rounded-md bg-white dark:bg-gray-900 p-4"
+                                        className={clsx("mb-2 w-full rounded-md bg-white dark:bg-gray-900 p-4", {
+                                            "opacity-50":
+                                                booking.status === "finished" ||
+                                                new Date(booking.endAt).getTime() < Date.now(),
+                                        })}
                                     >
                                         <div className="flex items-center justify-between w-full pb-4">
                                             <div className="mb-2 flex items-center w-full">
@@ -95,9 +99,9 @@ export default async function BookingsTable({ bookings }: { bookings: Booking[] 
                                         <tr
                                             key={booking._id}
                                             className={clsx("group", {
-                                                " opacity-25":
+                                                " opacity-50":
                                                     booking.status === "finished" ||
-                                                    new Date(booking.startAt).getTime() < Date.now(),
+                                                    new Date(booking.endAt).getTime() < Date.now(),
                                             })}
                                         >
                                             <td className="whitespace-nowrap bg-white dark:bg-gray-900 py-5 pl-4 pr-3 text-sm text-black dark:text-white group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
